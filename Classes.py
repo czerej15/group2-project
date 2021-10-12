@@ -95,7 +95,30 @@ class Student: # Keely
 		self.studentID = studentID
 		self.dob = dob
 		self.programCode = programCode #relate to program class
-		self.academicHist = academicHist #list [courseCode, mark, grade] in [subject1, subject2, subject3, subject4] in (semester1, semester2) in [year1, year2, year3, year4]
+		self.academicHist = academicHist #list [courseCode, mark, grade]
 		self.currentEnrol = currentEnrol #list of lists of class codes [course code, semester, year] in [subject1, subject2, subject3, subject4]
 		self.studyPlan = studyPlan #list of tuples [course code, semester, year] in 
 
+	def __str__(self):
+		pass
+
+	def get_student_details(self):
+		pass
+
+	def input_class(self, answer = 'Y', lst = []):
+		if answer == 'N' or 'n':
+			return
+		else:
+			tempaca = [input(f"Enter {self.name}'s first class in their academic history - eg. course code, mark, grade: ")]
+			lst.append(tempaca)
+			answer = input("If you would like to add another class print Y, if you are done adding classes print N: ").strip()
+			self.input_class(answer, lst)
+
+	def set_student_details(self):
+		self.name = input("Enter student's full name: ")
+			#raise error if none
+		self.studentID = input(f"Enter {self.name}'s student ID: ")
+		self.dob = input(f"Enter {self.name}'s date of birth: ")
+		self.programCode = input(f"Enter {self.name}'s program code: ")
+		self.input_class()
+		self.currentEnrol = [k for k in input(f"Enter {self.name}'s current enrollments: ")]
