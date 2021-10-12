@@ -24,7 +24,7 @@ class Course:
 	def removePreq(self, preq):
 		self.semesters.remove(preq)
 
-class Program:
+class Program: 
 	# This is the class of an academic program, like the Bachelor of Computer Science (BP094) and Bachelor of Software Engineering (BP096). 
 	# Each program consists of program code, credit points 
 	# (e.g.,BP094 requires completion of 288 credit points upon graduation),
@@ -42,7 +42,7 @@ class CourseOffering():
 		self.cap = max_students
 		self.enrolled_students = []
 
-class Semester:
+class Semester: # James
 	# The Semester class contains its identity, e.g., S22021, and a list of course offerings in the semester.
 	# For each course offering, it also contains the maximum student number 
 	# (aka. Cap, assume each course only allows a certain number of students to enrol),
@@ -72,7 +72,7 @@ class Semester:
 		for course in self.course_offerings:
 			print(course.name)
 
-class Student:
+class Student: # Keely
 	# The Student class stores the information of a student 
 	# (e.g., name, student id, D.O.B, etc), 
 	# program code (which program he/she is currently at), 
