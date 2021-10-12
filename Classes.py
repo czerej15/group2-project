@@ -59,7 +59,7 @@ class Semester: # James
 class Student: # Keely
 	# The Student class stores the information of a student 
 	# (e.g., name, student id, D.O.B, etc), 
-	# program code (which program he/she is currently at), 
+	# program code (which program they is currently at), 
 	# the academic history, current enrollments, and a study plan. 
 	# Assume a student can only have one active program. 
 	# The academic history stores a list of courses that a student has attempted before, as well his/her mark and grade of the attempted course. 
@@ -74,5 +74,12 @@ class Student: # Keely
 	# - If a student failed a course, the status of the study plan should indicate that it needs to be adjusted to reflect the updated plan on remainingstudies.
 	# - Similarly,if a student enrol in or unenroll from a course offering, this status should also be updated to reflect adjustment is needed on the studyplan.
 	# - When a new study plan is generated, the status of the study plan should indicate that the study plan is up-to-date.
-	def __init__():
-		pass
+	def __init__(self, name, studentID, dob, programCode, academicHist, currentEnrol, studyPlan):
+		self.name = name
+		self.studentID = studentID
+		self.dob = dob
+		self.programCode = programCode #relate to program class
+		self.academicHist = academicHist #list [courseCode, mark, grade] in [subject1, subject2, subject3, subject4] in (semester1, semester2) in [year1, year2, year3, year4]
+		self.currentEnrol = currentEnrol #list of lists of class codes [course code, semester, year] in [subject1, subject2, subject3, subject4]
+		self.studyPlan = studyPlan #list of tuples [course code, semester, year] in 
+
