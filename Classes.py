@@ -116,9 +116,22 @@ class Student: # Keely
 
 	def set_student_details(self):
 		self.name = input("Enter student's full name: ")
-			#raise error if none
+			#raise error if none if have time
 		self.studentID = input(f"Enter {self.name}'s student ID: ")
 		self.dob = input(f"Enter {self.name}'s date of birth: ")
 		self.programCode = input(f"Enter {self.name}'s program code: ")
 		self.input_class()
-		self.currentEnrol = [k for k in input(f"Enter {self.name}'s current enrollments: ")]
+		self.currentEnrol = input(f"Enter {self.name}'s current enrollments: ") #this line is in progress
+		self.studyPlan = input(f"Enter {self.name}'s study plan: ") #this line is in progress
+
+	def ammend_history(self):
+		pass
+
+	def ammend_plan(self):
+		pass
+
+	def get_plan_status(self):
+		pass
+
+	def append_marks(self):
+		pass
