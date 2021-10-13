@@ -94,7 +94,7 @@ class Student: # Keely
 		self.name = ''
 		self.studentID = ''
 		self.dob = ''
-		self.programCode = Program.programCode #relate to program class
+		self.programCode = '' #relate to program class
 		self.academicHist = [] #list [courseCode, mark, grade]
 		self.currentEnrol = [] #list of lists of class codes [course code, semester, year] in [subject1, subject2, subject3, subject4] 
 		self.studyPlan = [] #aks minyi about this type and if it includes electives. Is the data based on 
@@ -142,14 +142,21 @@ class Student: # Keely
 		self.currentEnrol = [self.input_currentEnrol()]
 		self.studyPlan = [self.input_studyPlan()]
 
-	def ammend_history(self):
+	def append_marks(self, courseCode, ):
 		pass
 
-	def ammend_plan(self):
+	def ammend_history(self, courseCode, semester, year):
+		self.academicHist.append([courseCode, semester, year])
+		self.append_marks()
+		self.currentEnrol.pop([courseCode, semester, year])
+
+	def ammend_plan(self, courseCode, semester, year):
+		self.studyPlan.pop([courseCode, semester, year])
+		self.currentEnrol.append([courseCode, semester, year])
 		pass
 
 	def get_plan_status(self):
-		pass
-
-	def append_marks(self):
+		for curClass in self.currentEnrol:
+			if curClass[2] == 'NN':
+				pass
 		pass
