@@ -31,8 +31,8 @@ class Program:
 	# a list of core courses (mandatory requirements) and a list of programe lective courses.
 	# In this system prototype, to make it simple, we can ignore the possibilities of a university elective, 
 	# i.e., a program can only containcore and elective courses.
-	def __init__():
-		pass
+	def __init__(self):
+		self.programCode = ''
 
 
 class CourseOffering():
@@ -87,17 +87,17 @@ class Student: # Keely
 	# - Once the official marks of the current enrollments are released, they should be moved to his/her academic history.
 	# - You might also want to include a status of the study plan. 
 	# For instance:
-	# - If a student failed a course, the status of the study plan should indicate that it needs to be adjusted to reflect the updated plan on remainingstudies.
+	# - If a student failed a course, the status of the study plan should indicate that it needs to be adjusted to reflect the updated plan on remaining studies.
 	# - Similarly,if a student enrol in or unenroll from a course offering, this status should also be updated to reflect adjustment is needed on the studyplan.
 	# - When a new study plan is generated, the status of the study plan should indicate that the study plan is up-to-date.
-	def __init__(self, name, studentID, dob, programCode, academicHist, currentEnrol, studyPlan):
-		self.name = name
-		self.studentID = studentID
-		self.dob = dob
-		self.programCode = programCode #relate to program class
-		self.academicHist = academicHist #list [courseCode, mark, grade]
-		self.currentEnrol = currentEnrol #list of lists of class codes [course code, semester, year] in [subject1, subject2, subject3, subject4]
-		self.studyPlan = studyPlan #list of tuples [course code, semester, year] in 
+	def __init__(self):
+		self.name = ''
+		self.studentID = ''
+		self.dob = ''
+		self.programCode = Program.programCode #relate to program class
+		self.academicHist = [] #list [courseCode, mark, grade]
+		self.currentEnrol = [] #list of lists of class codes [course code, semester, year] in [subject1, subject2, subject3, subject4] 
+		self.studyPlan = [] #aks minyi about this type and if it includes electives. Is the data based on 
 
 	def __str__(self):
 		pass
@@ -105,11 +105,29 @@ class Student: # Keely
 	def get_student_details(self):
 		pass
 
-	def input_class(self, answer = 'Y', lst = []):
+	def input_academicHist(self, answer = 'Y', lst = []):
 		if answer == 'N' or 'n':
-			return
+			return lst
 		else:
-			tempaca = [input(f"Enter {self.name}'s first class in their academic history - eg. course code, mark, grade: ")]
+			tempaca = [input(f"Enter a class in {self.name}'s academic history - eg. course code, mark, grade: ")]
+			lst.append(tempaca)
+			answer = input("If you would like to add another class print Y, if you are done adding classes print N: ").strip()
+			self.input_class(answer, lst)
+
+	def input_currentEnrol(self, answer = 'Y', lst = []):
+		if answer == 'N' or 'n':
+			return lst
+		else:
+			tempaca = [input(f"Enter a class in {self.name}'s current enrollments - eg. course code, semester, year: ")]
+			lst.append(tempaca)
+			answer = input("If you would like to add another class print Y, if you are done adding classes print N: ").strip()
+			self.input_class(answer, lst)
+	
+	def input_studyPlan(self, answer = 'Y', lst = []):
+		if answer == 'N' or 'n':
+			return lst
+		else:
+			tempaca = [input(f"Enter a class in {self.name}'s study plan - eg. course code, semester, year: ")]
 			lst.append(tempaca)
 			answer = input("If you would like to add another class print Y, if you are done adding classes print N: ").strip()
 			self.input_class(answer, lst)
@@ -120,9 +138,9 @@ class Student: # Keely
 		self.studentID = input(f"Enter {self.name}'s student ID: ")
 		self.dob = input(f"Enter {self.name}'s date of birth: ")
 		self.programCode = input(f"Enter {self.name}'s program code: ")
-		self.input_class()
-		self.currentEnrol = input(f"Enter {self.name}'s current enrollments: ") #this line is in progress
-		self.studyPlan = input(f"Enter {self.name}'s study plan: ") #this line is in progress
+		self.academicHist = [self.input_academicHist()]
+		self.currentEnrol = [self.input_currentEnrol()]
+		self.studyPlan = [self.input_studyPlan()]
 
 	def ammend_history(self):
 		pass
