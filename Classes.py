@@ -124,10 +124,10 @@ class Student: # Keely
 		self.currentEnrol = [] #list of lists of class codes [course code, semester, year] in [subject1, subject2, subject3, subject4] 
 		self.studyPlan = [] #aks minyi about this type and if it includes electives. Is the data based on 
 
-	def __str__(self):
+	def __str__(self): #to do
 		pass
 
-	def get_student_details(self):
+	def get_student_details(self): #to do
 		pass
 
 	def input_academicHist(self, answer = 'Y', lst = []):
@@ -167,21 +167,21 @@ class Student: # Keely
 		self.currentEnrol = [self.input_currentEnrol()]
 		self.studyPlan = [self.input_studyPlan()]
 
-	def append_marks(self, courseCode, ):
-		pass
+	def append_marks(self, courseCode, mark, grade):
+		self.academicHist.append([courseCode, mark, grade])
 
-	def ammend_history(self, courseCode, semester, year):
-		self.academicHist.append([courseCode, semester, year])
-		self.append_marks()
+	def ammend_history(self, courseCode, semester, year, mark, grade):
+		self.append_marks(courseCode, mark, grade)
 		self.currentEnrol.pop([courseCode, semester, year])
 
 	def ammend_plan(self, courseCode, semester, year):
 		self.studyPlan.pop([courseCode, semester, year])
 		self.currentEnrol.append([courseCode, semester, year])
-		pass
-
+		
 	def get_plan_status(self):
+		failList = []
 		for curClass in self.currentEnrol:
 			if curClass[2] == 'NN':
-				pass
-		pass
+				failList.append(curClass[1])
+		print(f"{self.name}'s study plan should be revisited. {[f for f in failList]} have not been completed to satisfactory standards.")
+		
