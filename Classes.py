@@ -125,9 +125,9 @@ class Student: # Keely
 		self.studyPlan = [] #aks minyi about this type and if it includes electives. Is the data based on 
 
 	def __str__(self): #to do
-		pass
+		print(f"Name: {self.name}\n Student ID: {self.studentID}\n Date of Birth: {self.dob}\n Program Code: {self.programCode}\n Academic History: {self.academicHist}\n Current Enrollments {self.currentEnrol}\n Study Plan {self.studyPlan}\n")
 
-	def get_student_details(self): #to do
+	def get_student_details(self): 
 		pass
 
 	def input_academicHist(self, answer = 'Y', lst = []):
@@ -183,5 +183,6 @@ class Student: # Keely
 		for curClass in self.currentEnrol:
 			if curClass[2] == 'NN':
 				failList.append(curClass[1])
-		print(f"{self.name}'s study plan should be revisited. {[f for f in failList]} have not been completed to satisfactory standards.")
+		if len(failList) >= 1:
+			print(f"{self.name}'s study plan should be revisited. {[f for f in failList]} have not been completed to satisfactory standards.")
 		
