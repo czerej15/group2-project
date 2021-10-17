@@ -131,31 +131,31 @@ class Student: # Keely
 		pass
 
 	def input_academicHist(self, answer = 'Y', lst = []):
-		if answer == 'N' or 'n':
+		if answer == 'N':
 			return lst
 		else:
 			tempaca = [input(f"Enter a class in {self.name}'s academic history - eg. course code, mark, grade: ")]
 			lst.append(tempaca)
 			answer = input("If you would like to add another class print Y, if you are done adding classes print N: ").strip()
-			self.input_class(answer, lst)
+			self.input_academicHist(answer, lst)
 
 	def input_currentEnrol(self, answer = 'Y', lst = []):
-		if answer == 'N' or 'n':
+		if answer == 'N':
 			return lst
 		else:
 			tempaca = [input(f"Enter a class in {self.name}'s current enrollments - eg. course code, semester, year: ")]
 			lst.append(tempaca)
 			answer = input("If you would like to add another class print Y, if you are done adding classes print N: ").strip()
-			self.input_class(answer, lst)
+			self.input_currentEnrol(answer, lst)
 	
 	def input_studyPlan(self, answer = 'Y', lst = []):
-		if answer == 'N' or 'n':
+		if answer == 'N':
 			return lst
 		else:
 			tempaca = [input(f"Enter a class in {self.name}'s study plan - eg. course code, semester, year: ")]
 			lst.append(tempaca)
 			answer = input("If you would like to add another class print Y, if you are done adding classes print N: ").strip()
-			self.input_class(answer, lst)
+			self.input_studyPlan(answer, lst)
 
 	def set_student_details(self):
 		self.name = input("Enter student's full name: ")
@@ -163,9 +163,10 @@ class Student: # Keely
 		self.studentID = input(f"Enter {self.name}'s student ID: ")
 		self.dob = input(f"Enter {self.name}'s date of birth: ")
 		self.programCode = input(f"Enter {self.name}'s program code: ")
-		self.academicHist = [self.input_academicHist()]
-		self.currentEnrol = [self.input_currentEnrol()]
-		self.studyPlan = [self.input_studyPlan()]
+		print('hello')
+		self.academicHist = str(self.input_academicHist())
+		self.currentEnrol = str(self.input_currentEnrol())
+		self.studyPlan = str(self.input_studyPlan())
 
 	def append_marks(self, courseCode, mark, grade):
 		self.academicHist.append([courseCode, mark, grade])
