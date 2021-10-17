@@ -119,7 +119,7 @@ class Student: # Keely
 		self.name = ''
 		self.studentID = ''
 		self.dob = ''
-		self.programCode = '' #relate to program class
+		#self.programCode = Program.programCode #relate to program class   # had to temporarly comment this out for testing - james
 		self.academicHist = [] #list [courseCode, mark, grade]
 		self.currentEnrol = [] #list of lists of class codes [course code, semester, year] in [subject1, subject2, subject3, subject4] 
 		self.studyPlan = [] #aks minyi about this type and if it includes electives. Is the data based on 
