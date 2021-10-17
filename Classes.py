@@ -124,10 +124,10 @@ class Student: # Keely
 		self.currentEnrol = [] #list of lists of class codes [course code, semester, year] in [subject1, subject2, subject3, subject4] 
 		self.studyPlan = [] #aks minyi about this type and if it includes electives. Is the data based on 
 
-	def __str__(self):
-		pass
+	def __str__(self): #to do
+		print(f"Name: {self.name}\n Student ID: {self.studentID}\n Date of Birth: {self.dob}\n Program Code: {self.programCode}\n Academic History: {self.academicHist}\n Current Enrollments {self.currentEnrol}\n Study Plan {self.studyPlan}\n")
 
-	def get_student_details(self):
+	def get_student_details(self): 
 		pass
 
 	def input_academicHist(self, answer = 'Y', lst = []):
@@ -167,14 +167,22 @@ class Student: # Keely
 		self.currentEnrol = [self.input_currentEnrol()]
 		self.studyPlan = [self.input_studyPlan()]
 
-	def ammend_history(self):
-		pass
+	def append_marks(self, courseCode, mark, grade):
+		self.academicHist.append([courseCode, mark, grade])
 
-	def ammend_plan(self):
-		pass
+	def ammend_history(self, courseCode, semester, year, mark, grade):
+		self.append_marks(courseCode, mark, grade)
+		self.currentEnrol.pop([courseCode, semester, year])
 
+	def ammend_plan(self, courseCode, semester, year):
+		self.studyPlan.pop([courseCode, semester, year])
+		self.currentEnrol.append([courseCode, semester, year])
+		
 	def get_plan_status(self):
-		pass
-
-	def append_marks(self):
-		pass
+		failList = []
+		for curClass in self.currentEnrol:
+			if curClass[2] == 'NN':
+				failList.append(curClass[1])
+		if len(failList) >= 1:
+			print(f"{self.name}'s study plan should be revisited. {[f for f in failList]} have not been completed to satisfactory standards.")
+		
