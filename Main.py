@@ -57,25 +57,35 @@ if __name__ == "__main__":
 						if student == False: # if student not returned
 							print("Student not found.")
 							continue
-						
-						print("----------------------------------------")
-						# print student info
-						print("Name:", student.name)
-						print("Student ID:", student.studentID)
-						print("Date of Birth:", student.dob)
-						print("Student Menu:")
-						#print(student.programCode)
-						# student menu options
-						print("1 - Display academic history and current enrolment")
-						print("2 - Querying course or program information")
-						print("3 - Enrol/UnEnrol in a current offering")
-						print("4 - Exit")
-						stud_opt = input("Press the respective key to navigate:")
-						if not checkValidOptionNumb(stud_opt, 4):
-							continue
+						while True:
+							print("----------------------------------------")
+							# print student info
+							print("Name:", student.name)
+							print("Student ID:", student.studentID)
+							print("Date of Birth:", student.dob)
+							print("Student Menu:")
+							#print(student.programCode)
+							# student menu options
+							print("1 - Display academic history and current enrolment")
+							print("2 - Querying course or program information")
+							print("3 - Enrol/UnEnrol in a current offering")
+							print("4 - Exit")
+							stud_opt = input("Press the respective key to navigate:")
+							print(stud_opt)
+							if not checkValidOptionNumb(stud_opt, 4):
+								continue
 
-						if stud_opt == 4: #exit
-							break
+							if stud_opt == "4": #exit
+								break
+
+							if stud_opt == "1": 
+								pass
+
+							if stud_opt == "2": 
+								pass
+
+							if stud_opt == "3": 
+								pass
 
 
 		if main_opt == '2':
@@ -96,6 +106,36 @@ if __name__ == "__main__":
 				admin_opt = input("Press the respective key to navigate:")
 				if not checkValidOptionNumb(admin_opt, 10):
 					continue
-				if admin_opt == '10':
+
+				if admin_opt == '10': #exit
 					break
+
+				if admin_opt == "1": 
+					pass
+
+				if admin_opt == "2": 
+					pass
+
+				if admin_opt == "3": 
+					pass
+
+				if admin_opt == "4": 
+					pass
+
+				if admin_opt == "5": 
+					pass
+
+				if admin_opt == "6": 
+					pass
+
+				if admin_opt == "7": 
+					pass
+
+				if admin_opt == "8": 
+					pass
+
+				if admin_opt == "9": 
+					pass
+
+
 
