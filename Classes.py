@@ -128,7 +128,20 @@ class Student: # Keely
 		print(f"Name: {self.name}\n Student ID: {self.studentID}\n Date of Birth: {self.dob}\n Program Code: {self.programCode}\n Academic History: {self.academicHist}\n Current Enrollments {self.currentEnrol}\n Study Plan {self.studyPlan}\n")
 
 	def get_student_details(self): 
-		pass
+		f = open('student_data.csv')
+		contents = f.read().split('\n')
+
+		temp = []
+		for i in range(len(contents)):
+			lst = contents[i].split(';')
+			for j in lst:
+				l = j.strip(',')
+				k = l.split(',')
+				temp.append(k)
+				if k == ['']:
+					temp.remove(k)
+
+		
 
 	def input_academicHist(self, answer = 'Y', lst = []):
 		if answer == 'N':
