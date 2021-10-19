@@ -33,6 +33,7 @@ if __name__ == "__main__":
 			continue
 
 		if main_opt == '3': # exit
+			print("----------------------------------------")
 			print('Goodbye.')
 			break 
 
@@ -49,6 +50,7 @@ if __name__ == "__main__":
 					break
 				
 				if sID_opt == "1":
+					print("----------------------------------------")
 					id = input("Enter student ID:")
 					if checkStudentID(id): # returns true if valid
 						#student_list is a list that just contains the Student instances. Probably created in "Inputing_Data.py"
