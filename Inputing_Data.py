@@ -4,7 +4,10 @@ f = open('student_data.csv')
 contents = f.read().split('\n')
 f.close()  # close the file
 
-large = []
+
+print(contents)
+
+'''large = []
 temp = []
 count = 0
 for i in range(len(contents)):
@@ -17,6 +20,7 @@ for i in range(len(contents)):
 		if k == ['']:
 			temp.remove(k)
 			count -= 1
+		Student()
 		if count % 7 == 0:
 			large.append(temp)
 			if temp == []:
@@ -30,4 +34,5 @@ searchName = str(input())
 for p in range(len(large)):
 		if temp[p][0][0] == searchName:
 			print(True)
-			# Student.get_student_details(temp[p][h][0],temp[p][h][1])
+			# Student.get_student_details(temp[p][h][0],temp[p][h][1])'''
+

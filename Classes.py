@@ -108,35 +108,33 @@ class Student: # Keely
 	# (course code, semester, year) that he/she is currently enrolled in, and a study plan is a list of tuples 
 	# (course code, semester, year) indicating the future plan for completing the remaining studies towards graduation
 	# (i.e.,the study plan excludes the courses that the student has already passed, and courses that he is currently enrolled in.).
-	# The Student class should provide constructor, string methods, getter ands etters, as well as methods to amend the academic history and study plan.
+	# The Student class should provide constructor, string methods, getter and setters, as well as methods to amend the academic history and study plan.
 	# - Once the official marks of the current enrollments are released, they should be moved to his/her academic history.
 	# - You might also want to include a status of the study plan. 
 	# For instance:
 	# - If a student failed a course, the status of the study plan should indicate that it needs to be adjusted to reflect the updated plan on remaining studies.
 	# - Similarly,if a student enrol in or unenroll from a course offering, this status should also be updated to reflect adjustment is needed on the studyplan.
 	# - When a new study plan is generated, the status of the study plan should indicate that the study plan is up-to-date.
-	def __init__(self):
-		self.name = ''
-		self.studentID = ''
-		self.dob = ''
-		self.programCode = ''  # had to temporarly comment this out for testing - james  #keely changed it for inputing data
-		self.academicHist = [] #list [courseCode, mark, grade]
-		self.currentEnrol = [] #list of lists of class codes [course code, semester, year] in [subject1, subject2, subject3, subject4] 
-		self.studyPlan = [] #aks minyi about this type and if it includes electives. Is the data based on 
+	def __init__(self, name = '', studentID = '', dob = '', programCode = '', academicHist = [], currentEnrol = []):
+		self.name = name
+		self.studentID = studentID
+		self.dob = dob
+		self.programCode = programCode  # had to temporarly comment this out for testing - james  #keely changed it for inputing data
+		self.academicHist = academicHist #list [courseCode, mark, grade]
+		self.currentEnrol = currentEnrol #list of lists of class codes [course code, semester, year] in [subject1, subject2, subject3, subject4]
 
 	def __str__(self): 
 		print(f"Name: {self.name}\n Student ID: {self.studentID}\n Date of Birth: {self.dob}\n Program Code: {self.programCode}\n Academic History: {self.academicHist}\n Current Enrollments {self.currentEnrol}\n Study Plan {self.studyPlan}\n")
 
-	def get_student_details(self, name, studentID, dob, programCode, academicHist, currentEnrol, studyPlan): 
-		self.name = name
-		self.studentID = studentID
-		self.dob = dob
-		self.programCode = programCode 
-		self.academicHist = academicHist
-		self.currentEnrol = currentEnrol
-		self.studyPlan = studyPlan
+	def append_marks(self, courseCode, mark, grade):
+		self.academicHist.append([courseCode, mark, grade])
 
-	def input_academicHist(self, answer = 'Y', lst = []):
+	def ammend_history(self, courseCode, semester, year, mark, grade):
+		self.append_marks(courseCode, mark, grade)
+		self.currentEnrol.pop([courseCode, semester, year])
+
+	# mostly irrelevent now but i'm keeping it just in case - keely
+	'''def input_academicHist(self, answer = 'Y', lst = []):
 		if answer == 'N':
 			return lst
 		else:
@@ -161,27 +159,10 @@ class Student: # Keely
 			tempaca = [input(f"Enter a class in {self.name}'s study plan - eg. course code, semester, year: ")]
 			lst.append(tempaca)
 			answer = input("If you would like to add another class print Y, if you are done adding classes print N: ").strip()
-			self.input_studyPlan(answer, lst)
+			self.input_studyPlan(answer, lst)'''
 
-	def set_student_details(self):
-		self.name = input("Enter student's full name: ")
-			#raise error if none if have time
-		self.studentID = input(f"Enter {self.name}'s student ID: ")
-		self.dob = input(f"Enter {self.name}'s date of birth: ")
-		self.programCode = input(f"Enter {self.name}'s program code: ")
-		print('hello')
-		self.academicHist = str(self.input_academicHist())
-		self.currentEnrol = str(self.input_currentEnrol())
-		self.studyPlan = str(self.input_studyPlan())
-
-	def append_marks(self, courseCode, mark, grade):
-		self.academicHist.append([courseCode, mark, grade])
-
-	def ammend_history(self, courseCode, semester, year, mark, grade):
-		self.append_marks(courseCode, mark, grade)
-		self.currentEnrol.pop([courseCode, semester, year])
-
-	def ammend_plan(self, courseCode, semester, year):
+	# study plan
+	'''def ammend_plan(self, courseCode, semester, year):
 		self.studyPlan.pop([courseCode, semester, year])
 		self.currentEnrol.append([courseCode, semester, year])
 		
@@ -191,5 +172,5 @@ class Student: # Keely
 			if curClass[2] == 'NN':
 				failList.append(curClass[1])
 		if len(failList) >= 1:
-			print(f"{self.name}'s study plan should be revisited. {[f for f in failList]} have not been completed to satisfactory standards.")
+			print(f"{self.name}'s study plan should be revisited. {[f for f in failList]} have not been completed to satisfactory standards.")'''
 		
