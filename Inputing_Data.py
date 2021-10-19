@@ -1,38 +1,18 @@
 from Classes import Student
 
+# open and read data from file
 f = open('student_data.csv')
-contents = f.read().split('\n')
-f.close()  # close the file
+contents = f.read().split('\n') # split each student up
+f.close()
+
+dictStudent = {}
+
+for i in range(len(contents)): # for each student
+	l = contents[i].split(';') # split the data in a student record into the seperate features
+	ID = Student(l[0], l[1], l[2], l[3], l[4], l[5]) # create student instance
+	dictStudent[l[1]] = ID # assign the instance to a dictionary key. Access it by calling dictStudent['s3898340'].name ect 
 
 
-print(contents)
 
-'''large = []
-temp = []
-count = 0
-for i in range(len(contents)):
-	lst = contents[i].split(';')
-	for j in lst:
-		count += 1
-		l = j.strip(',')
-		k = l.split(',')
-		temp.append(k)
-		if k == ['']:
-			temp.remove(k)
-			count -= 1
-		Student()
-		if count % 7 == 0:
-			large.append(temp)
-			if temp == []:
-				large.remove(temp)
-			temp = []
-	
-# after 7 or 8 appends, append to a whole new list to split between students
-#print(large[1][0][0])
 
-searchName = str(input())
-for p in range(len(large)):
-		if temp[p][0][0] == searchName:
-			print(True)
-			# Student.get_student_details(temp[p][h][0],temp[p][h][1])'''
 
