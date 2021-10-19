@@ -19,10 +19,10 @@ class Course:
 		self.semesters.remove(semester)
 
 	def addPreq(self, preq):
-		self.semesters.append(preq)
+		self.prerequisites.append(preq)
 
 	def removePreq(self, preq):
-		self.semesters.remove(preq)
+		self.prerequisites.remove(preq)
 
 class Program: 
 	# This is the class of an academic program, like the Bachelor of Computer Science (BP094) and Bachelor of Software Engineering (BP096). 
@@ -62,8 +62,8 @@ class Program:
 
 class CourseOffering():
 	""" This class is to be used for the Semester class """
-	def __init__(self, course_name, max_students):
-		self.name = course_name
+	def __init__(self, id, max_students):
+		self.id = id
 		self.cap = max_students
 		self.enrolled_students = []
 
@@ -80,8 +80,8 @@ class Semester: # James
 		self.identity = identity #e.g., S22021
 		self.course_offerings = []
 	
-	def add_course_offering(self, name, cap):
-		self.course_offerings.append(CourseOffering(name, cap))
+	def add_course_offering(self, id, cap):
+		self.course_offerings.append(CourseOffering(id, cap))
 
 	def add_student(self, course, student):
 		if len(course.enrolled_students) < course.cap:
