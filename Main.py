@@ -1,25 +1,8 @@
 from Classes import Course, Program, Semester, Student
 from error_handling import *
-
-def findStudentByID(id, student_list):
-	for student in student_list:
-		if student.studentID == id:
-			return student
-	return False
+from Inputing_Data import dictStudent
 
 if __name__ == "__main__":
-
-	#temporary test list
-	ts1 = Student()
-	ts1.name = 'James'
-	ts1.studentID = 's3900781'
-	ts1.dob = "17/03/02"
-	ts2 = Student()
-	ts2.name = 'Dani'
-	ts2.studentID = 's1234567'
-	ts2.dob = "01/07/01"
-	student_list = [ts1,ts2]
-
 
 	while True:
 		print("----------------------------------------")
@@ -53,12 +36,12 @@ if __name__ == "__main__":
 					print("----------------------------------------")
 					id = input("Enter student ID:")
 					if checkStudentID(id): # returns true if valid
-						#student_list is a list that just contains the Student instances. Probably created in "Inputing_Data.py"
-						student = findStudentByID(id, student_list)
-						
-						if student == False: # if student not returned
+						if id not in dictStudent: # if student not returned
 							print("Student not found.")
 							continue
+						
+						student = dictStudent[id]
+						
 						while True:
 							print("----------------------------------------")
 							# print student info
