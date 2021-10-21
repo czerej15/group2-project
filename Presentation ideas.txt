@@ -3,4 +3,6 @@ Presentation ideas
     - the data was originally too complicated and too much
     - decided to just do two rows of each to simplify things, other rows could be added later
     - then it was imputing the data so that the data was in the correct format
-    - decided to 
+    - decided to create a class instance every time a row was read
+    - access the instance via a dictionary
+    - the student input is complete so all the otehrs are based off it
