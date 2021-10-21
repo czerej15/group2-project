@@ -5,12 +5,12 @@ class Course:
 	# e.g., [S1] indicades S1 only, [S2] indicates S2 only, and [S1,S2] means available in both semesters). 
 	# For instance, a sample list of courses, their information including 
 	# name, course code, pre-requisite and available semesters are available in your enrolment online systems as well as course guides.
-	def __init__(self, code, title, credit):
+	def __init__(self, code, title, credit, prereques = [], sems = []):
 		self.code = code
 		self.title = title
 		self.credit = credit
-		self.prerequisites = []
-		self.semesters = [] #e.g. [S1] or [S1, S2] or [S2]
+		self.prerequisites = prereques
+		self.semesters = sems #e.g. [S1] or [S1, S2] or [S2]
 
 	def addSemester(self, semester):
 		self.semesters.append(semester)
