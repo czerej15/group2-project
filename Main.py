@@ -1,6 +1,6 @@
 from Classes import Course, Program, Semester, Student
 from error_handling import *
-from Inputing_Data import dictStudent
+from Inputing_Data import dictStudent, dictCourseOff
 
 if __name__ == "__main__":
 

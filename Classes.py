@@ -31,11 +31,11 @@ class Program:
 	# a list of core courses (mandatory requirements) and a list of programe lective courses.
 	# In this system prototype, to make it simple, we can ignore the possibilities of a university elective, 
 	# i.e., a program can only containcore and elective courses.
-	def __init__(self, code, points):
+	def __init__(self, code, points, core = [], electives = []):
 		self.code = code
 		self.points = points # e.g. 288
-		self.core_courses = []
-		self.electives = []
+		self.core_courses = core
+		self.electives = electives
 	
 	def add_elective(self,elective):
 		self.electives.append(elective)
@@ -62,10 +62,10 @@ class Program:
 
 class CourseOffering():
 	""" This class is to be used for the Semester class """
-	def __init__(self, id, max_students):
+	def __init__(self, id, max_students, studentList = []):
 		self.id = id
 		self.cap = max_students
-		self.enrolled_students = []
+		self.enrolled_students = studentList
 
 class Semester: # James
 	# The Semester class contains its identity, e.g., S22021, and a list of course offerings in the semester.
