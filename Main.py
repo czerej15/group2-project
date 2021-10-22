@@ -7,8 +7,8 @@ if __name__ == "__main__":
 	while True:
 		print("----------------------------------------")
 		print("Welcome to the J.I.K enrolment system!")
-		print("1 - Student Login")
-		print("2 - System Login ")
+		print("1 - Student Login") # student and system seemed too similar so i changed one to admin, feel free to change it again tho - keely
+		print("2 - Admin Login ")
 		print("3 - Exit ")
 		main_opt = input("Press the respective key to navigate:")
 
@@ -48,19 +48,20 @@ if __name__ == "__main__":
 							print("Name:", student.name)
 							print("Student ID:", student.studentID)
 							print("Date of Birth:", student.dob)
+							print("Student Program:", student.programCode)
 							print("Student Menu:")
-							#print(student.programCode)
 							# student menu options
 							print("1 - Display academic history and current enrolment")
 							print("2 - Querying course or program information")
 							print("3 - Enrol/UnEnrol in a current offering")
-							print("4 - Exit")
+							print("4 - View current GPA") # in progress for extra functionalities
+							print("5 - Exit")
 							stud_opt = input("Press the respective key to navigate:")
 							print(stud_opt)
 							if not checkValidOptionNumb(stud_opt, 4):
 								continue
 
-							if stud_opt == "4": #exit
+							if stud_opt == "5": #exit
 								break
 
 							if stud_opt == "1": 
@@ -72,6 +73,20 @@ if __name__ == "__main__":
 							if stud_opt == "3": 
 								pass
 
+							if stud_opt == "4": # in progress, doesn't work - keely
+								GPA = 0
+								for acaRecord in student.academicHist:
+									if acaRecord == 'HD':
+										pass
+									if acaRecord == 'DI': 
+										pass
+									if acaRecord == 'CR': 
+										pass
+									if acaRecord == 'PA':
+										pass
+									if acaRecord == 'NN':
+										pass
+										
 
 		if main_opt == '2':
 			while True:
