@@ -1,6 +1,6 @@
 from Classes import Course, Program, Semester, Student
 from error_handling import *
-from Inputing_Data import dictStudent, dictCourseOff
+from Inputing_Data import dictStudent, dictCourseOff, dictSubject
 
 if __name__ == "__main__":
 
@@ -59,7 +59,7 @@ if __name__ == "__main__":
 							print("5 - Exit")
 							stud_opt = input("Press the respective key to navigate:")
 							print(stud_opt)
-							if not checkValidOptionNumb(stud_opt, 4):
+							if not checkValidOptionNumb(stud_opt, 5):
 								continue
 
 							if stud_opt == "5": #exit
@@ -96,19 +96,23 @@ if __name__ == "__main__":
 								pass
 
 							if stud_opt == "4": # in progress, doesn't work - keely
-								GPA = 0
-								for acaRecord in student.academicHist:
-									if acaRecord == 'HD':
-										pass
-									if acaRecord == 'DI': 
-										pass
-									if acaRecord == 'CR': 
-										pass
-									if acaRecord == 'PA':
-										pass
-									if acaRecord == 'NN':
-										pass
-										
+									gradePoints = 0
+									creditPoints = 0
+									for acaRecord in student.academicHist:
+										print(acaRecord)
+										if acaRecord in dictSubject:
+											print(dictSubject[acaRecord].credit)
+											creditPoints += dictSubject[acaRecord].credit
+										if acaRecord == 'HD':
+											gradePoints += 4
+										elif acaRecord == 'DI': 
+											gradePoints += 3
+										elif acaRecord == 'CR': 
+											gradePoints += 2
+										elif acaRecord == 'PA':
+											gradePoints += 1
+										else:
+											gradePoints += 0
 
 		if main_opt == '2':
 			while True:
