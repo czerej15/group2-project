@@ -5,7 +5,7 @@ from Inputing_Data import dictStudent, dictCourseOff
 if __name__ == "__main__":
 
 	while True:
-		print("----------------------------------------")
+		print("-----------------------------------------")
 		print("Welcome to the J.I.K enrolment system!")
 		print("1 - Student Login") # student and system seemed too similar so i changed one to admin, feel free to change it again tho - keely
 		print("2 - Admin Login ")
@@ -16,13 +16,13 @@ if __name__ == "__main__":
 			continue
 
 		if main_opt == '3': # exit
-			print("----------------------------------------")
+			print("-----------------------------------------")
 			print('Goodbye.')
 			break 
 
 		if main_opt == '1': # student
 			while True:
-				print("----------------------------------------")
+				print("-----------------------------------------")
 				print("1 - Enter student ID")
 				print("2 - Exit")
 				sID_opt = input("Press the respective key to navigate:")
@@ -33,7 +33,7 @@ if __name__ == "__main__":
 					break
 				
 				if sID_opt == "1":
-					print("----------------------------------------")
+					print("-----------------------------------------")
 					id = input("Enter student ID:")
 					if checkStudentID(id): # returns true if valid
 						if id not in dictStudent: # if student not returned
@@ -43,7 +43,7 @@ if __name__ == "__main__":
 						student = dictStudent[id]
 						
 						while True:
-							print("----------------------------------------")
+							print("-----------------------------------------")
 							# print student info
 							print("Name:", student.name)
 							print("Student ID:", student.studentID)
@@ -51,6 +51,7 @@ if __name__ == "__main__":
 							print("Student Program:", student.programCode)
 							print("Student Menu:")
 							# student menu options
+							print()
 							print("1 - Display academic history and current enrolment")
 							print("2 - Querying course or program information")
 							print("3 - Enrol/UnEnrol in a current offering")
@@ -65,8 +66,29 @@ if __name__ == "__main__":
 								break
 
 							if stud_opt == "1": 
-								pass
+								
+								print("------------Current Enrolment------------")
+								# loop through currentEnrol list, printing its contents
+								c = 0
+								for i in range(len(student.currentEnrol)//3):
+									print("Course Code:", student.currentEnrol[c]) 
+									print("Semester:", student.currentEnrol[c+1][0:2]) 
+									print("Year:", student.currentEnrol[c+2]) 
+									print()
+									c += 3
 
+								print("------------Academic History------------")
+								# loop through academicHist list, printing its contents
+								c = 0
+								for i in range(len(student.academicHist)//3):
+									print("Course Code:", student.academicHist[c], end = ' | ') 
+									print("Mark: ", student.academicHist[c+1], end = ' | ')
+									print("Grade:", student.academicHist[c+2]) 
+									c += 3
+								print()
+								input('Press enter to go back')
+								
+								
 							if stud_opt == "2": 
 								pass
 
