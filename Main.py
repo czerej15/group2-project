@@ -99,20 +99,22 @@ if __name__ == "__main__":
 									gradePoints = 0
 									creditPoints = 0
 									for acaRecord in student.academicHist:
-										print(acaRecord)
 										if acaRecord in dictSubject:
-											print(dictSubject[acaRecord].credit)
-											creditPoints += dictSubject[acaRecord].credit
+											creditPoints += int(dictSubject[acaRecord].credit)
+											tempCredit = int(dictSubject[acaRecord].credit)
 										if acaRecord == 'HD':
-											gradePoints += 4
+											gradePoints += 4 * tempCredit
 										elif acaRecord == 'DI': 
-											gradePoints += 3
+											gradePoints += 3 * tempCredit
 										elif acaRecord == 'CR': 
-											gradePoints += 2
+											gradePoints += 2 * tempCredit
 										elif acaRecord == 'PA':
-											gradePoints += 1
+											gradePoints += 1 * tempCredit
 										else:
 											gradePoints += 0
+									
+									GPA = gradePoints/creditPoints
+									print(f"{student.name}'s GPA is {GPA:.2f}")
 
 		if main_opt == '2':
 			while True:

@@ -59,5 +59,5 @@ dictSubject = {}
 for i in range(len(contents)): # for each course
 	l = contents[i].split(';') # split the data in a course record into the seperate features
 	ID = Course(l[0], l[1], l[2], l[3], l[4]) # create course instance
-	dictSubject[l[1]] = ID # assign the instance to a dictionary key. Access it by calling dictSubject['ISYS1118'].title ect 
+	dictSubject[l[0]] = ID # assign the instance to a dictionary key. Access it by calling dictSubject['ISYS1118'].title ect
 ###################################################################
