@@ -1,23 +1,25 @@
 def checkStudentID(id):
     """Return True if valid ID, else return False. prints related error messages"""
     try:
-        
-        #raise errot if:
-        #if id not start with s
-        # if id not digits (excluding first letter)
-        # if id not required lenght 
+        if id[0] != "s":
+            raise ValueError("Id doesn't start with 's'")   
+        for i in range(1, len(id)):
+            if '0' <= id[i] <= '9':
+                continue
+            raise ValueError("The characters in id are not digits")
         return True
-    except:
-        pass
+    except Exception as e:       
+        print(e)
+        return False
 
 def checkValidOptionNumb(option, max):
     """Returns true if option is a number in the range: 1 to max (inclusive). Else returns False. prints related error messages """
     try:
-        pass
-        #raise errot if:
-        #if not number
-        # if outside range [1 to max] inclusive
-        return True
-    except:
-        pass
+        option = int(option)
+        if 1 <= option <= max:
+            return True
+        raise ValueError
+    except Exception as e:       
+        print(e)
+        return False
     
