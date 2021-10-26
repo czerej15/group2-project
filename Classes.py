@@ -147,44 +147,9 @@ class Student: # Keely
 		self.append_marks(courseCode, mark, grade)
 		self.currentEnrol.pop([courseCode, semester, year])
 
-	# mostly irrelevent now but i'm keeping it just in case - keely
-	'''def input_academicHist(self, answer = 'Y', lst = []):
-		if answer == 'N':
-			return lst
-		else:
-			tempaca = [input(f"Enter a class in {self.name}'s academic history - eg. course code, mark, grade: ")]
-			lst.append(tempaca)
-			answer = input("If you would like to add another class print Y, if you are done adding classes print N: ").strip()
-			self.input_academicHist(answer, lst)
+class StudyPlan:
+	def __init__(self, name, code, points, studentID = '', dob = '', programCode = '', academicHist = [], currentEnrol = [], core = [], electives = []):
+		Student.__init__(self, name, studentID = '', dob = '', programCode = '', academicHist = [], currentEnrol = [])
+		Program.__init__(self, code, points, core = [], electives = [])
 
-	def input_currentEnrol(self, answer = 'Y', lst = []):
-		if answer == 'N':
-			return lst
-		else:
-			tempaca = [input(f"Enter a class in {self.name}'s current enrollments - eg. course code, semester, year: ")]
-			lst.append(tempaca)
-			answer = input("If you would like to add another class print Y, if you are done adding classes print N: ").strip()
-			self.input_currentEnrol(answer, lst)
-	
-	def input_studyPlan(self, answer = 'Y', lst = []):
-		if answer == 'N':
-			return lst
-		else:
-			tempaca = [input(f"Enter a class in {self.name}'s study plan - eg. course code, semester, year: ")]
-			lst.append(tempaca)
-			answer = input("If you would like to add another class print Y, if you are done adding classes print N: ").strip()
-			self.input_studyPlan(answer, lst)'''
-
-	# study plan
-	'''def ammend_plan(self, courseCode, semester, year):
-		self.studyPlan.pop([courseCode, semester, year])
-		self.currentEnrol.append([courseCode, semester, year])
-		
-	def get_plan_status(self):
-		failList = []
-		for curClass in self.currentEnrol:
-			if curClass[2] == 'NN':
-				failList.append(curClass[1])
-		if len(failList) >= 1:
-			print(f"{self.name}'s study plan should be revisited. {[f for f in failList]} have not been completed to satisfactory standards.")'''
 		
