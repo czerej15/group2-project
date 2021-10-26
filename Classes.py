@@ -144,9 +144,5 @@ class Student: # Keely
 		self.append_marks(courseCode, mark, grade)
 		self.currentEnrol.pop([courseCode, semester, year])
 
-class StudyPlan:
-	def __init__(self, name, code, points, studentID = '', dob = '', programCode = '', academicHist = [], currentEnrol = [], core = [], electives = []):
-		Student.__init__(self, name, studentID, dob, programCode, academicHist, currentEnrol)
-		Program.__init__(self, code, points, core, electives)
 
 		
