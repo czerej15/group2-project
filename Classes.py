@@ -23,6 +23,15 @@ class Course:
 
 	def removePreq(self, preq):
 		self.prerequisites.remove(preq)
+	
+	def __str__(self):
+		return_string = ''
+		return_string += 'Code: ' + self.code + "\n"
+		return_string += 'Title: ' + self.title + "\n"
+		return_string += 'Credit: ' + self.credit + "\n"
+		return_string += 'Prerequistes: ' + self.prerequisites + "\n"
+		return_string += 'Avaliable Semesters:: ' + self.semesters
+		return return_string
 
 class Program: 
 	# This is the class of an academic program, like the Bachelor of Computer Science (BP094) and Bachelor of Software Engineering (BP096). 
