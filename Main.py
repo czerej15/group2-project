@@ -1,7 +1,7 @@
 from Classes import Course, Program, Semester, Student
 from error_handling import *
 from Inputing_Data import dictStudent, dictCourseOff, dictSubject, dictPrograms
-from admin_menu import *
+from admin_menu import adminMenu
 from student_menu import studentMenu
 
 

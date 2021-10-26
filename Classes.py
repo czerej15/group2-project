@@ -59,15 +59,12 @@ class Program:
 		self.electives.remove(elective)
 	
 	def __str__(self):
-		print("Code:", self.code)
-		print("Credit Points:", self.points)
-		print("Core Course:")
-		for core in self.core_courses:
-			print(core)
-		print("Electives:")
-		for elective in self.electives:
-			print(elective)
-	
+		return_string = ''
+		return_string += "Code: " + self.code + "\n"
+		return_string += 'Credit Points: ' + self.points + "\n"
+		return_string += 'Core Course: ' + self.core_courses + "\n"
+		return_string += 'Electives: ' + self.electives + "\n"
+		return return_string
 
 class CourseOffering():
 	""" This class is to be used for the Semester class """
