@@ -96,25 +96,29 @@ if __name__ == "__main__":
 								pass
 
 							if stud_opt == "4": # in progress, doesn't work - keely
-									gradePoints = 0
-									creditPoints = 0
-									for acaRecord in student.academicHist:
-										if acaRecord in dictSubject:
-											creditPoints += int(dictSubject[acaRecord].credit)
-											tempCredit = int(dictSubject[acaRecord].credit)
-										if acaRecord == 'HD':
-											gradePoints += 4 * tempCredit
-										elif acaRecord == 'DI': 
-											gradePoints += 3 * tempCredit
-										elif acaRecord == 'CR': 
-											gradePoints += 2 * tempCredit
-										elif acaRecord == 'PA':
-											gradePoints += 1 * tempCredit
-										else:
-											gradePoints += 0
+								print("------------Student GPA------------")
+								gradePoints = 0
+								creditPoints = 0
+								for acaRecord in student.academicHist:
+									if acaRecord in dictSubject:
+										creditPoints += int(dictSubject[acaRecord].credit)
+										tempCredit = int(dictSubject[acaRecord].credit)
+									if acaRecord == 'HD':
+										gradePoints += 4 * tempCredit
+									elif acaRecord == 'DI': 
+										gradePoints += 3 * tempCredit
+									elif acaRecord == 'CR': 
+										gradePoints += 2 * tempCredit
+									elif acaRecord == 'PA':
+										gradePoints += 1 * tempCredit
+									else:
+										gradePoints += 0
 									
 									GPA = gradePoints/creditPoints
 									print(f"{student.name}'s GPA is {GPA:.2f}")
+
+								print()
+								input('Press enter to go back')
 
 		if main_opt == '2':
 			while True:
