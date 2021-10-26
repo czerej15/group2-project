@@ -31,25 +31,25 @@ def studentMenu():
                     print("Student ID:", student.studentID)
                     print("Date of Birth:", student.dob)
                     print("Student Program:", student.programCode)
-                    print("Student Menu:")
-                    # student menu options
                     print()
+                    # student menu options
+                    print("Student Menu:")
                     print("1 - Display academic history and current enrolment")
                     print("2 - Querying course or program information")
                     print("3 - Enrol/UnEnrol in a current offering")
                     print("4 - View current GPA") # in progress for extra functionalities
                     print("5 - Exit")
                     stud_opt = input("Press the respective key to navigate:")
-                    print(stud_opt)
+                    
                     if not checkValidOptionNumb(stud_opt, 5):
                         continue
 
                     if stud_opt == "5": #exit
                         break
 
-                    if stud_opt == "1": 
-                        
+                    if stud_opt == "1":                         
                         print("------------Current Enrolment------------")
+                        print(student.currentEnrol)
                         # loop through currentEnrol list, printing its contents
                         c = 0
                         for i in range(len(student.currentEnrol)//3):
@@ -72,24 +72,40 @@ def studentMenu():
                         
                         
                     if stud_opt == "2": 
+                        print("-----------------------------------------")
                         while True:
                             print("1 - Query Course")
                             print("2 - Query Program")
+                            print("3 - Exit")
                             cou_or_prog_inpt = input("Press the respective key to navigate:")
                             
-                            if not checkValidOptionNumb(sID_opt, 2):
+                            if not checkValidOptionNumb(sID_opt, 3): 
+                                # if input not valid, reprint menu
                                 continue
-                            if cou_or_prog_inpt == '1':
+
+                            if cou_or_prog_inpt == '3': #exit while loop aka go to previous menu
+                                break
+
+                            if cou_or_prog_inpt == '1': # query course
                                 course = input("Enter course code:")
+                                if not (course in dictSubject):
+                                    print('Course not found')
+                                    continue
+                                print("-----------------------------------------")
                                 print(dictSubject[course])
-                                input()
+                                input("Press enter to go back")
                                 
 
-                            if cou_or_prog_inpt == '2':
+                            if cou_or_prog_inpt == '2': # query program
                                 program = input("Enter program code:")
+                                print(dictPrograms)
+                                if not (program in dictPrograms):
+                                    print('Program not found')
+                                    continue
+                               
+                                print("-----------------------------------------")
                                 print(dictPrograms[program])
-
-                            
+                                input("Press enter to go back")                
 
                     if stud_opt == "3": 
                         pass
