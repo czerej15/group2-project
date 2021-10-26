@@ -15,18 +15,23 @@ if __name__ == "__main__":
 		print("3 - Exit ")
 		main_opt = input("Press the respective key to navigate:")
 
-		if not checkValidOptionNumb(main_opt, 3):
+		if not checkValidOptionNumb(main_opt, 3):  # if input not valid, reprint menu 
 			continue
 
 		if main_opt == '3': # exit
 			print("-----------------------------------------")
-			print('Goodbye.')
-			break 
+			print("Are you sure you want to exit? ")
+			exit_inpt = input("(key 'y' for yes/ any other key for no):")
+			if exit_inpt == "y": # if anything else, will naturally just continue while loop (reprint menu)
+				print("-----------------------------------------")
+				print('Goodbye.')
+				break 
 
-		if main_opt == '1': # student
+	
+		if main_opt == '1': # student menu
 			studentMenu()
 
-		if main_opt == '2':
+		if main_opt == '2': # admin menu
 			adminMenu()
 
 
