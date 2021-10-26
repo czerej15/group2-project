@@ -5,11 +5,11 @@ class Course:
 	# e.g., [S1] indicades S1 only, [S2] indicates S2 only, and [S1,S2] means available in both semesters). 
 	# For instance, a sample list of courses, their information including 
 	# name, course code, pre-requisite and available semesters are available in your enrolment online systems as well as course guides.
-	def __init__(self, code, title, credit, prereques = [], sems = []):
+	def __init__(self, code, title, credit, prereques, sems):
 		self.code = code
 		self.title = title
 		self.credit = credit
-		self.prerequisites = prereques
+		self.prerequisites = [prereques]
 		self.semesters = sems #e.g. [S1] or [S1, S2] or [S2]
 
 	def addSemester(self, semester):
@@ -68,10 +68,16 @@ class Program:
 
 class CourseOffering():
 	""" This class is to be used for the Semester class """
-	def __init__(self, id, max_students, studentList = []):
+	def __init__(self, id, max_students):
 		self.id = id
 		self.cap = max_students
-		self.enrolled_students = studentList
+		self.enrolled_students = []
+
+	def __str__(self):
+		return_string = "ID:" + self.id
+		return_string += "Cap:" + str(self.cap)
+		return_string += "Enrolled students:" + str(self.enrolled_students)
+		return return_string
 
 class Semester: # James
 	# The Semester class contains its identity, e.g., S22021, and a list of course offerings in the semester.
@@ -87,21 +93,30 @@ class Semester: # James
 		self.course_offerings = []
 	
 	def add_course_offering(self, id, cap):
-		self.course_offerings.append(CourseOffering(id, cap))
+		self.course_offerings.append(CourseOffering(id, int(cap)))
 
-	def add_student(self, course, student):
-		if len(course.enrolled_students) < course.cap:
+	def add_student(self, course_name, student):
+		course = self.getCourseOfferingObj(course_name)
+		if len(course.enrolled_students) <= course.cap:
 			course.enrolled_students.append(student)
 		else:
 			print("Can't add, cap reached.")
 
-	def remove_student(self, course, student):
+	def remove_student(self, course_name, student):
+		course = self.getCourseOfferingObj(course_name)
 		course.enrolled_students.remove(student)
 
 	def __str__(self):
 		print(self.identity)
 		for course in self.course_offerings:
 			print(course.name)
+
+	def getCourseOfferingObj(self, name):
+		for course in self.course_offerings:
+			if course.id == name:
+				return course
+
+
 
 class Student: # Keely
 	# The Student class stores the information of a student 

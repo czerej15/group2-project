@@ -15,11 +15,21 @@ def checkStudentID(id):
 def checkValidOptionNumb(option, max):
     """Returns true if option is a number in the range: 1 to max (inclusive). Else returns False. prints related error messages """
     try:
+        # please raise an error if not int, with unique message
+        # please raise an error if not in range, with unique message
         option = int(option)
         if 1 <= option <= max:
             return True
         raise ValueError
     except Exception as e:       
         print(e)
+        return False
+
+def checkYorN(inpt):
+    # check if inpt == 'y' or 'n' and return True
+    # else neither, return false print('Not valid option')
+    try:
+        return True
+    except:
         return False
     

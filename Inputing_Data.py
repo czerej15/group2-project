@@ -1,4 +1,4 @@
-from Classes import Student, CourseOffering, Program, Course
+from Classes import Student, CourseOffering, Program, Course, Semester
 
 ###################################################################
 # Student
@@ -20,16 +20,16 @@ for i in range(len(contents)): # for each student
 ###################################################################
 # Course Offerings
 # open and read data from file
-f = open('Course_Offerings.csv')
-contents = f.read().split('\n') # split each course offering up
-f.close()
+#f = open('Course_Offerings.csv')
+#contents = f.read().split('\n') # split each course offering up
+#f.close()
 
 dictCourseOff = {}
 
-for i in range(len(contents)): # for each course offering
-	l = contents[i].split(';') # split the data in a course offering record into the seperate features
-	ID = CourseOffering(l[0], l[1], l[2]) # create course offering instance
-	dictCourseOff[l[0]] = ID # assign the instance to a dictionary key. Access it by calling dictStudent['COSC2800'].enrolled_students ect 
+#for i in range(len(contents)): # for each course offering
+#	l = contents[i].split(';') # split the data in a course offering record into the seperate features
+#	ID = CourseOffering(l[0], l[1], l[2]) # create course offering instance
+#	dictCourseOff[l[0]] = ID # assign the instance to a dictionary key. Access it by calling dictStudent['COSC2800'].enrolled_students ect 
 ###################################################################
 
 ###################################################################
@@ -58,6 +58,38 @@ dictSubject = {}
 
 for i in range(len(contents)): # for each course
 	l = contents[i].split(';') # split the data in a course record into the seperate features
+#	print(l[0], l[1], l[2], l[3], l[4])
 	ID = Course(l[0], l[1], l[2], l[3], l[4]) # create course instance
 	dictSubject[l[0]] = ID # assign the instance to a dictionary key. Access it by calling dictSubject['ISYS1118'].title ect
 ###################################################################
+
+
+
+f = open('semester_data.csv')
+contents = f.read() 
+contents = contents.split('\n')
+f.close()
+dictSemester = {}
+
+for line in contents:
+	line = line.split(';')
+	# line example
+	# ['S12021', 'COSC2801,5,s3900781,s3900123,s3900321', 'IBY2041,3,s3900111,s3900222,s3900555']
+	new_semester = Semester(line[0])
+	for course in line[1:]:
+		course = course.split(',')
+		new_semester.add_course_offering(course[0], course[1])
+		for student in course[2:]:
+			new_semester.add_student(course[0], student)
+	dictSemester[new_semester.identity] = new_semester
+
+
+if __name__ == "__main__": # for testing
+
+	#print(dictSemester["S22021"].identity)
+	#for course in dictSemester["S22021"].course_offerings:
+	#	print(course)
+	#	print()
+	#print(dictSubject)
+	#print(dictSubject["ISYS1118"].prerequisites[0])
+	print(dictSubject["COSC2804"].prerequisites[0])

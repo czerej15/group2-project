@@ -1,6 +1,6 @@
 from Classes import Course, Program, Semester, Student
 from error_handling import *
-from Inputing_Data import dictStudent, dictCourseOff, dictSubject, dictPrograms
+from Inputing_Data import dictStudent, dictCourseOff, dictSubject, dictPrograms, dictSemester
 
 def studentMenu():
     while True:
@@ -9,6 +9,7 @@ def studentMenu():
         print("2 - Exit")
         sID_opt = input("Press the respective key to navigate:")
         if not checkValidOptionNumb(sID_opt, 2):
+            # if input not valid, reprint menu (continue goes to start of while loop)
             continue
         
         if sID_opt == '2': #exit
@@ -42,6 +43,7 @@ def studentMenu():
                     stud_opt = input("Press the respective key to navigate:")
                     
                     if not checkValidOptionNumb(stud_opt, 5):
+                        # if input not valid, reprint menu (continue goes to start of while loop)
                         continue
 
                     if stud_opt == "5": #exit
@@ -54,7 +56,7 @@ def studentMenu():
                         c = 0
                         for i in range(len(student.currentEnrol)//3):
                             print("Course Code:", student.currentEnrol[c]) 
-                            print("Semester:", student.currentEnrol[c+1][0:2]) 
+                            print("Semester:", student.currentEnrol[c+1][0:2]) #print first 2 characters, not including year
                             print("Year:", student.currentEnrol[c+2]) 
                             print()
                             c += 3
@@ -71,16 +73,16 @@ def studentMenu():
                         input('Press enter to go back')
                         
                         
-                    if stud_opt == "2": 
-                        print("-----------------------------------------")
+                    if stud_opt == "2":        
                         while True:
+                            print("-----------------------------------------")
                             print("1 - Query Course")
                             print("2 - Query Program")
                             print("3 - Exit")
                             cou_or_prog_inpt = input("Press the respective key to navigate:")
                             
                             if not checkValidOptionNumb(sID_opt, 3): 
-                                # if input not valid, reprint menu
+                                # if input not valid, reprint menu (continue goes to start of while loop)
                                 continue
 
                             if cou_or_prog_inpt == '3': #exit while loop aka go to previous menu
@@ -95,10 +97,8 @@ def studentMenu():
                                 print(dictSubject[course])
                                 input("Press enter to go back")
                                 
-
                             if cou_or_prog_inpt == '2': # query program
                                 program = input("Enter program code:")
-                                print(dictPrograms)
                                 if not (program in dictPrograms):
                                     print('Program not found')
                                     continue
@@ -108,7 +108,79 @@ def studentMenu():
                                 input("Press enter to go back")                
 
                     if stud_opt == "3": 
-                        pass
+                        while True:
+                            print("-----------------------------------------")
+                            print("1 - Enrol")
+                            print("2 - Unenroll")
+                            print("3 - Exit")
+                            enroll_inpt = input("Press the respective key to navigate:")
+
+                            if not checkValidOptionNumb(enroll_inpt, 3): 
+                                # if input not valid, reprint menu (continue goes to start of while loop)
+                                continue
+
+                            if enroll_inpt == '3': #exit while loop aka go to previous menu
+                                break
+                            
+                            if enroll_inpt == '1': # enrol
+                                unav_courses = []
+                                avail_courses = []
+                                for offering in dictSemester['S22021'].course_offerings:
+                                    # if course was attempted (in acedmic history)
+                                    if (offering.id in student.academicHist):
+                                        # if attempted course resulted in failure, can do again
+                                        index =  student.academicHist.index(offering.id)
+                                        if int(student.academicHist[index+1]) > 59:
+                                            unav_courses.append(offering.id)
+                                        else:
+                                            avail_courses.append(offering.id)
+                                    elif (offering.id in student.currentEnrol):
+                                        # if student currently doing course or did it in the pass
+                                        unav_courses.append(offering.id)
+                                    else:
+                                        avail_courses.append(offering.id)
+                                print("Available Courses:")
+                                for avai in avail_courses:
+                                   print(avai)
+                                print()
+                                print("Unavailable Course:")
+                                for unav in unav_courses:
+                                   print(unav)
+
+                                enrol_cour = input("Enter course code you wish to enrol in:")
+                                # check student has completed prerequistes for course wanting to enrol in
+                                if enrol_cour in avail_courses:
+                                    flag = True
+                                    for preq in dictSubject[enrol_cour].prerequisites:
+                                        if preq in student.academicHist:
+                                            continue
+                                        else:
+                                            flag = False
+                                    if flag == True:
+                                        dictSemester["S22021"].add_student(enrol_cour, student.studentID)
+                                        student.currentEnrol.append(enrol_cour)
+                                        student.currentEnrol.append('S22021')
+                                        student.currentEnrol.append('2021')
+                                    
+                                else:
+                                    print('Not available course')
+                                
+                                
+
+                                # edit semester:
+                                #  add_student(self, course, student):
+                                #  remove_student(self, course, student):
+
+                                # edit student:
+                                # - current_enrolement
+                            if enroll_inpt == '2': # unenroll
+                                pass
+                                # edit semester:
+                                # def add_student(self, course, student):
+                                # def remove_student(self, course, student):
+
+                                # edit student:
+                                # - current_enrolement
 
                     if stud_opt == "4": # in progress, doesn't work - keely
                         print("------------Student GPA------------")
