@@ -46,9 +46,17 @@ def adminMenu():
             pass
 
         if admin_opt == "8": 
-            toDo = []
+            print("-----------------------------------------")
+            id = input("Enter student ID:")
+            if checkStudentID(id): # returns true if valid
+                if id not in dictStudent: # if student not returned
+                    print("Student not found.")
+                    continue
+                
+                student = dictStudent[id]
+                program = dictPrograms[student.programCode]
 
-            enrolProg = Student.programCode
+            toDo = []
 
             for item in Program.core_courses:
                 if item not in Student.academicHist or item not in Student.currentEnrol:
