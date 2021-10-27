@@ -51,7 +51,6 @@ def studentMenu():
 
                     if stud_opt == "1":                         
                         print("------------Current Enrolment------------")
-                        print(student.currentEnrol)
                         # loop through currentEnrol list, printing its contents
                         c = 0
                         for i in range(len(student.currentEnrol)//3):
@@ -125,6 +124,8 @@ def studentMenu():
                             if enroll_inpt == '1': # enrol
                                 unav_courses = []
                                 avail_courses = []
+                                # go through course offerings in the current semester, sorting semesters 
+                                # into avaliable or unavaliable 
                                 for offering in dictSemester['S22021'].course_offerings:
                                     # if course was attempted (in acedmic history)
                                     if (offering.id in student.academicHist):
@@ -135,13 +136,15 @@ def studentMenu():
                                         else:
                                             avail_courses.append(offering.id)
                                     elif (offering.id in student.currentEnrol):
-                                        # if student currently doing course or did it in the pass
+                                        # if student currently doing course 
                                         unav_courses.append(offering.id)
                                     else:
                                         avail_courses.append(offering.id)
+                                print("-----------------------------------------")
                                 print("Available Courses:")
                                 for avai in avail_courses:
                                    print(avai)
+
                                 print()
                                 print("Unavailable Course:")
                                 for unav in unav_courses:
@@ -157,10 +160,14 @@ def studentMenu():
                                         else:
                                             flag = False
                                     if flag == True:
+                                        # if preequistes satisfied, enrol
+                                     
                                         dictSemester["S22021"].add_student(enrol_cour, student.studentID)
                                         student.currentEnrol.append(enrol_cour)
                                         student.currentEnrol.append('S22021')
                                         student.currentEnrol.append('2021')
+                                        print("Successfully enrolled in ", enrol_cour)
+                                        input('Press enter to go back')
                                     
                                 else:
                                     print('Not available course')
@@ -174,13 +181,27 @@ def studentMenu():
                                 # edit student:
                                 # - current_enrolement
                             if enroll_inpt == '2': # unenroll
-                                pass
-                                # edit semester:
-                                # def add_student(self, course, student):
-                                # def remove_student(self, course, student):
+                                print("-----------------------------------------")
+                                print("Currently Enrolled Courses:")
+                                # just prints course codes from .currentEnrol list
+                                c=0
+                                for i in range(len(student.currentEnrol)//3):
+                                    print(student.currentEnrol[c]) 
+                                    c += 3
 
-                                # edit student:
-                                # - current_enrolement
+                                unenrol_cour = input("Enter course code you wish to unenroll from:")
+                                if unenrol_cour in student.currentEnrol:
+                                    dictSemester["S22021"].remove_student(unenrol_cour, student.studentID)
+                                    index =  student.currentEnrol.index(unenrol_cour)
+                                    
+                                    del student.currentEnrol[index]
+                                    del student.currentEnrol[index]
+                                    del student.currentEnrol[index]
+                                   
+                                    print("Successfully unenrolled from ", unenrol_cour)
+                                    input('Press enter to go back')
+                                else:
+                                    print("Not a valid course to unenroll from")
 
                     if stud_opt == "4": # in progress, doesn't work - keely
                         print("------------Student GPA------------")
