@@ -7,10 +7,10 @@ def adminMenu():
 		# system login
         print("----------------------------------------")
         print("Admin Menu:")
-        print("1 - Add/Remove/Amend a student")
-        print("2 - Add/Remove/Amend a course")
-        print("3 - Add/Remove/Amend a program")
-        print("4 - Add/Remove/Amend a semester")
+        print("1 - Add/Remove a student")
+        print("2 - Add/Remove a course")
+        print("3 - Add/Remove a program")
+        print("4 - Add/Remove a semester")
         print("5 - Query student information")
         print("6 - Allow manual amendment of the study plan for a student")
         print("7 - Validating a student’s study plan")
@@ -24,8 +24,51 @@ def adminMenu():
         if admin_opt == '10': #exit
             break
 
-        if admin_opt == "1": 
-            pass
+        if admin_opt == "1":  # remove/add student
+            print("----------------------------------------")
+            print("1 - Add Student")
+            print("2 - Remove Student")
+            print("3 - Exit")
+            add_or_rem_inpt = input("Press the respective key to navigate:")
+
+            if add_or_rem_inpt == "3": # add student
+                while True:
+                    print("-----------------------------------------")
+                    print("1 - Enter student ID")
+                    print("2 - Exit")
+                    a_sID_opt = input("Press the respective key to navigate:")
+                    if not checkValidOptionNumb(sID_opt, 2):
+                        # if input not valid, reprint menu (continue goes to start of while loop)
+                        continue
+
+                    if a_sID_opt == "2":
+                        break
+
+                    if a_sID_opt == "1":
+                        pass
+                        
+                        # add student
+                            
+            if add_or_rem_inpt == "2": # remove student
+                while True:
+                    print("-----------------------------------------")
+                    print("1 - Enter student ID")
+                    print("2 - Exit")
+                    sID_opt = input("Press the respective key to navigate:")
+                    if not checkValidOptionNumb(sID_opt, 2):
+                        # if input not valid, reprint menu (continue goes to start of while loop)
+                        continue
+
+                    if sID_opt == "2":
+                        break
+
+                    if sID_opt == "1":
+                        stud_to_rem = input("Enter ID of student to remove:")
+                        if checkStudentID(stud_to_rem) and (stud_to_rem in dictStudent):
+                            pass
+                            # remove student from semester.enrolledStudent
+                            # remove from dictStudent
+                
 
         if admin_opt == "2": 
             pass
@@ -37,7 +80,49 @@ def adminMenu():
             pass
 
         if admin_opt == "5": 
-            pass
+            while True:
+                print("-----------------------------------------")
+                print("1 - Enter student ID")
+                print("2 - Exit")
+                sID_opt = input("Press the respective key to navigate:")
+                if not checkValidOptionNumb(sID_opt, 2):
+                    # if input not valid, reprint menu (continue goes to start of while loop)
+                    continue
+
+                if sID_opt == '2':
+                    break
+
+                if sID_opt == '1':
+                    print("-----------------------------------------")
+                    student_id = input('Enter ID of student to query:')
+                    if checkStudentID(student_id) and (student_id in dictStudent):
+                        student = dictStudent[student_id]
+                        print("-----------------------------------------")
+                        print("Name:", student.name)
+                        print("Student ID:", student.studentID)
+                        print("Date of Birth:", student.dob)
+                        print("Student Program:", student.programCode)
+                        print()
+                        print("------------Current Enrolment------------")
+                        # loop through currentEnrol list, printing its contents
+                        c = 0
+                        for i in range(len(student.currentEnrol)//3):
+                            print("Course Code:", student.currentEnrol[c]) 
+                            print("Semester:", student.currentEnrol[c+1][0:2]) #print first 2 characters, not including year
+                            print("Year:", student.currentEnrol[c+2]) 
+                            print()
+                            c += 3
+
+                        print("------------Academic History------------")
+                        # loop through academicHist list, printing its contents
+                        c = 0
+                        for i in range(len(student.academicHist)//3):
+                            print("Course Code:", student.academicHist[c], end = ' | ') 
+                            print("Mark: ", student.academicHist[c+1], end = ' | ')
+                            print("Grade:", student.academicHist[c+2]) 
+                            c += 3
+                        print()
+                        input('Press enter to go back')
 
         if admin_opt == "6": 
             pass
