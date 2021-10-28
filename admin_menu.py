@@ -123,7 +123,7 @@ def adminMenu():
                             semstr_list.append(new_semstr)
                         else:
                             print("Invalid semester")
-                        new_semstr = input("Enter a semester, or enter 'e' to stop:")
+                        new_semstr = input("Enter a semester (e.g. S12021), or enter 'e' to stop:")
                     
                     while True:
                         new_cap = input('Enter the student cap:')
@@ -155,15 +155,17 @@ def adminMenu():
 
                         if cou_opt == "1": # remove course
                             cou_to_rem = input("Enter code of course to remove:")
-                            if (cou_opt in dictSubject):
+                            if cou_to_rem in dictSubject:
+                                # remove course from semester instances
+                                for semester in dictSubject[cou_to_rem].semesters: 
+                                    cour_obj = dictSemester[semester].getCourseOfferingObj(cou_to_rem)
+                                    if not (cour_obj == False):
+                                        dictSemester[semester].course_offerings.remove(cour_obj)
+                                
                                 dictSubject.pop(cou_to_rem)
-
-                                for semester in dictSemester.values():
-                                    cour_obj = semester.getCourseOfferingObj(cou_to_rem)
-                                    semester.course_offerings.remove(cour_obj)
                                 
                                 # remove course from student's currently enrolled 
-                                for student in dictSubject.values():
+                                for student in dictStudent.values():
                                     if cou_to_rem in student.currentEnrol:
                                        
                                         index = student.currentEnrol.index(cou_to_rem)
@@ -171,11 +173,14 @@ def adminMenu():
                                         del student.currentEnrol[index]
                                         del student.currentEnrol[index]
                                         del student.currentEnrol[index]
-                                    
-                                    
-                                print("Successfully removed", stud_to_rem)
+                                
+                                print("Successfully removed", cou_to_rem)
                                 input("Press enter to return")
                     
+                            else:
+                                print('This course could not be found')
+                                    
+                               
 
         if admin_opt == "3": 
             pass
