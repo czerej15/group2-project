@@ -58,8 +58,9 @@ dictSubject = {}
 
 for i in range(len(contents)): # for each course
 	l = contents[i].split(';') # split the data in a course record into the seperate features
-#	print(l[0], l[1], l[2], l[3], l[4])
-	ID = Course(l[0], l[1], l[2], l[3], l[4]) # create course instance
+	#print(l[0], l[1], l[2], l[3], l[4])
+#	print(l[4].split(','))
+	ID = Course(l[0], l[1], l[2], l[3].split(','), l[4].split(',')) # create course instance
 	dictSubject[l[0]] = ID # assign the instance to a dictionary key. Access it by calling dictSubject['ISYS1118'].title ect
 ###################################################################
 
@@ -92,4 +93,8 @@ if __name__ == "__main__": # for testing
 	#	print()
 	#print(dictSubject)
 	#print(dictSubject["ISYS1118"].prerequisites[0])
-	print(dictSubject["COSC2804"].prerequisites[0])
+	print(dictSubject)
+	for ting in dictSubject:
+		print(dictSubject[ting].prerequisites)
+	
+	#print(dictSubject["COSC2804"].prerequisites[0])

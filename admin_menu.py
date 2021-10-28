@@ -1,6 +1,6 @@
 from Classes import Course, Program, Semester, Student
 from error_handling import *
-from Inputing_Data import dictStudent, dictCourseOff, dictSubject, dictPrograms
+from Inputing_Data import dictStudent, dictCourseOff, dictSubject, dictPrograms, dictSemester
 
 def adminMenu():
     while True:
@@ -40,21 +40,6 @@ def adminMenu():
 
                 if add_or_rem_inpt == "1": # add student option
                    
-                   # while True:
-                    #    print("-----------------------------------------")
-                     #   print("1 - Enter student ID")
-                      #  print("2 - Exit")
-                       # a_sID_opt = input("Press the respective key to navigate:")
-
-                      #  if not checkValidOptionNumb(a_sID_opt, 2):
-                            # if input not valid, reprint menu (continue goes to start of while loop)
-                            #continue
-
-                      #  if a_sID_opt == "2": # exit
-                       #     break
-
-                        #if a_sID_opt == "1": # add student
-
                         while True:
                             new_name = input('Enter a name:')
                             if checkNameValid(new_name): # if valid name, break while loop and continue
@@ -70,11 +55,9 @@ def adminMenu():
                             if checkDOBValid(new_dob): # if valid dob, break while loop and continue
                                 break
                       
-                        dictStudent[new_id] = Student(name = new_name, studentID = new_id, dob = new_dob) # create new instance of student and add to 
-                      
-                            
-                            
-                            
+                        dictStudent[new_id] = Student(name = new_name, studentID = new_id, dob = new_dob) # create new instance of student and add to  
+                        print("Successfully adeed", new_id)
+                        input("Press enter to return")  
                             
                             
                 if add_or_rem_inpt == "2": # remove student
@@ -92,14 +75,87 @@ def adminMenu():
 
                         if sID_opt == "1":
                             stud_to_rem = input("Enter ID of student to remove:")
-                            if checkStudentID(stud_to_rem) and (stud_to_rem in dictStudent):
-                                pass
-                                # remove student from semester.enrolledStudent
-                                # remove from dictStudent
+                            if checkStudentID(stud_to_rem) and (stud_to_rem in dictStudent): # if valid id and is a student in the system
+                                dictStudent.pop(stud_to_rem) # remove from dictStudent dictionary
+                                # for every semester, remove student from every course offering
+                                for semester in dictSemester.values():
+                                    for offering in semester.course_offerings:
+                                        if stud_to_rem in offering.enrolled_students:
+                                            # only attempts to remove if in list, else an error is generated
+                                            offering.enrolled_students.remove(stud_to_rem)
+                            print("Successfully removed", stud_to_rem)
+                            input("Press enter to return")
                     
 
         if admin_opt == "2": 
-            pass
+            while True:
+                print("----------------------------------------")
+                print("1 - Add Course")
+                print("2 - Remove Course")
+                print("3 - Exit")
+                course_add_rem = input("Press the respective key to navigate:")
+
+                if not checkValidOptionNumb(course_add_rem, 3):
+                    continue
+
+                if course_add_rem == "3":
+                    break
+
+                if course_add_rem == "1": # add course option
+                    new_title = input('Enter the course title:')
+                    new_code = input('Enter the course code:')
+                    while True:
+                        new_credit = input('Enter the credit:')
+                        if new_credit.isdigit(): # if credit just numbers, break while loop and continue
+                            break
+                        print("Credit must be a number")
+                    
+
+                    new_preq = input("Enter a prequisite, or enter 'e' to stop:")
+                    preq_list = []
+                    while new_preq != 'e':
+                        preq_list.append(new_preq)
+                        new_preq = input("Enter a prequisite, or enter 'e' to stop:")
+
+                    new_semstr = input("Enter a semester, or enter 'e' to stop:")
+                    semstr_list = []
+                    while new_semstr != 'e':
+                        semstr_list.append(new_semstr)
+                        new_semstr = input("Enter a prequisite, or enter 'e' to stop:")
+                    
+                    
+                      
+                    dictSemester[new_code] = Semester(title = new_title, code = new_code, credit = new_credit) # create new instance of student and add to  
+                    print("Successfully adeed", new_id)
+                    input("Press enter to return")  
+                            
+                            
+                if add_or_rem_inpt == "2": # remove student
+                    while True:
+                        print("-----------------------------------------")
+                        print("1 - Enter student ID")
+                        print("2 - Exit")
+                        sID_opt = input("Press the respective key to navigate:")
+                        if not checkValidOptionNumb(sID_opt, 2):
+                            # if input not valid, reprint menu (continue goes to start of while loop)
+                            continue
+
+                        if sID_opt == "2":
+                            break
+
+                        if sID_opt == "1":
+                            stud_to_rem = input("Enter ID of student to remove:")
+                            if checkStudentID(stud_to_rem) and (stud_to_rem in dictStudent): # if valid id and is a student in the system
+                                dictStudent.pop(stud_to_rem) # remove from dictStudent dictionary
+                                # for every semester, remove student from every course offering
+                                for semester in dictSemester.values():
+                                    for offering in semester.course_offerings:
+                                        if stud_to_rem in offering.enrolled_students:
+                                            # only attempts to remove if in list, else an error is generated
+                                            offering.enrolled_students.remove(stud_to_rem)
+                            print("Successfully removed", stud_to_rem)
+                            input("Press enter to return")
+                    
 
         if admin_opt == "3": 
             pass
