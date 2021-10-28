@@ -29,7 +29,7 @@ def checkValidOptionNumb(option, max):
         return False
 
 def checkDOBValid(dob):
-    """This functions returns true if dob is in this format: DD/MM/YYYY , e.g. 17/03/2012"""
+    """This functions returns true if dob is in this format: DD/MM/YYYY , e.g. 17/03/2012. . raise an error if appropiate with unique message """
     try:
          return True
        
@@ -37,7 +37,7 @@ def checkDOBValid(dob):
         return False
 
 def checkNameValid(name):
-    """ return false is contains any non alphabet characters """
+    """ return false is contains any non alphabet characters. raise an error if appropiate with unique message """
     try:
          # use .isalpha()
          return True
