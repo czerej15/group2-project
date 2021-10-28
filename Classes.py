@@ -9,7 +9,7 @@ class Course:
 		self.code = code
 		self.title = title
 		self.credit = credit
-		self.prerequisites = [prereques]
+		self.prerequisites = prereques
 		self.semesters = sems #e.g. [S1] or [S1, S2] or [S2]
 
 	def addSemester(self, semester):
