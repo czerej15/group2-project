@@ -174,12 +174,7 @@ def studentMenu():
                                 
                                 
 
-                                # edit semester:
-                                #  add_student(self, course, student):
-                                #  remove_student(self, course, student):
-
-                                # edit student:
-                                # - current_enrolement
+                        
                             if enroll_inpt == '2': # unenroll
                                 print("-----------------------------------------")
                                 print("Currently Enrolled Courses:")
