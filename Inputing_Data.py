@@ -42,7 +42,8 @@ f.close()
 dictPrograms = {}
 
 for i in range(len(contents)): # for each program
-	l = contents[i].split(';') # split the data in a program record into the seperate features
+	l = contents[i].split(';')
+	l[2] = l[2].split(',') # split the data in a program record into the seperate features
 	ID = Program(l[0], l[1], l[2], l[3]) # create program instance
 	dictPrograms[l[0]] = ID # assign the instance to a dictionary key. Access it by calling dictPrograms['BP094'].points ect 
 ###################################################################
