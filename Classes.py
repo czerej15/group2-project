@@ -115,6 +115,7 @@ class Semester: # James
 		for course in self.course_offerings:
 			if course.id == name:
 				return course
+		return False
 
 
 
