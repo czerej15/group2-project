@@ -30,7 +30,7 @@ def checkValidOptionNumb(option, max):
 
 def checkDOBValid(dob):
     """This functions returns true if dob is in this format: DD/MM/YYYY , e.g. 17/03/2012. . raise an error if appropiate with unique message """
-dob = input("Enter the date of birth : ")
+dob = input("Student date of birth : ")
 day,month,year = dob.split('/')
 ValidDate = True
 try :
