@@ -140,12 +140,29 @@ def adminMenu():
                 
                 student = dictStudent[id]
                 program = dictPrograms[student.programCode]
+                
 
             toDo = []
+            doneSub = []
 
-            for item in Program.core_courses:
-                if item not in Student.academicHist or item not in Student.currentEnrol:
+            for item in program.core_courses:
+                if item in student.academicHist or item in student.currentEnrol:
+                    doneSub.append(item)
+                else:
                     toDo.append(item)
+            print(toDo)
+
+            for ToDoIndex in range(len(toDo)):
+                subject = dictSubject[toDo[ToDoIndex]]
+                for subjectPrereq in subject.prerequisites:
+                    if subjectPrereq in toDo:
+                        toDo.pop(ToDoIndex)
+                        toDo.insert(ToDoIndex+1, toDo[ToDoIndex])
+            
+            print(toDo)
 
         if admin_opt == "9": 
             pass
+
+if __name__ == "__main__": # for testing
+    adminMenu()

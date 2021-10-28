@@ -203,7 +203,7 @@ def studentMenu():
                                 else:
                                     print("Not a valid course to unenroll from")
 
-                    if stud_opt == "4": # in progress, doesn't work - keely
+                    if stud_opt == "4": 
                         print("------------Student GPA------------")
                         gradePoints = 0
                         creditPoints = 0
