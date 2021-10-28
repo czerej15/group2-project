@@ -25,50 +25,78 @@ def adminMenu():
             break
 
         if admin_opt == "1":  # remove/add student
-            print("----------------------------------------")
-            print("1 - Add Student")
-            print("2 - Remove Student")
-            print("3 - Exit")
-            add_or_rem_inpt = input("Press the respective key to navigate:")
+            while True:
+                print("----------------------------------------")
+                print("1 - Add Student")
+                print("2 - Remove Student")
+                print("3 - Exit")
+                add_or_rem_inpt = input("Press the respective key to navigate:")
 
-            if add_or_rem_inpt == "3": # add student
-                while True:
-                    print("-----------------------------------------")
-                    print("1 - Enter student ID")
-                    print("2 - Exit")
-                    a_sID_opt = input("Press the respective key to navigate:")
-                    if not checkValidOptionNumb(sID_opt, 2):
-                        # if input not valid, reprint menu (continue goes to start of while loop)
-                        continue
+                if not checkValidOptionNumb(admin_opt, 3):
+                    continue
 
-                    if a_sID_opt == "2":
-                        break
+                if add_or_rem_inpt == "3":
+                    break
 
-                    if a_sID_opt == "1":
-                        pass
+                if add_or_rem_inpt == "1": # add student option
+                   
+                   # while True:
+                    #    print("-----------------------------------------")
+                     #   print("1 - Enter student ID")
+                      #  print("2 - Exit")
+                       # a_sID_opt = input("Press the respective key to navigate:")
+
+                      #  if not checkValidOptionNumb(a_sID_opt, 2):
+                            # if input not valid, reprint menu (continue goes to start of while loop)
+                            #continue
+
+                      #  if a_sID_opt == "2": # exit
+                       #     break
+
+                        #if a_sID_opt == "1": # add student
+
+                        while True:
+                            new_name = input('Enter a name:')
+                            if checkNameValid(new_name): # if valid name, break while loop and continue
+                                break
                         
-                        # add student
+                        while True:
+                            new_id = input('Enter a student ID:')
+                            if checkStudentID(new_id) and not (new_id in dictStudent): # if valid id, break while loop and continue
+                                break
+
+                        while True:
+                            new_dob = input('Enter a date of birth:')
+                            if checkDOBValid(new_dob): # if valid dob, break while loop and continue
+                                break
+                      
+                        dictStudent[new_id] = Student(name = new_name, studentID = new_id, dob = new_dob) # create new instance of student and add to 
+                      
                             
-            if add_or_rem_inpt == "2": # remove student
-                while True:
-                    print("-----------------------------------------")
-                    print("1 - Enter student ID")
-                    print("2 - Exit")
-                    sID_opt = input("Press the respective key to navigate:")
-                    if not checkValidOptionNumb(sID_opt, 2):
-                        # if input not valid, reprint menu (continue goes to start of while loop)
-                        continue
+                            
+                            
+                            
+                            
+                if add_or_rem_inpt == "2": # remove student
+                    while True:
+                        print("-----------------------------------------")
+                        print("1 - Enter student ID")
+                        print("2 - Exit")
+                        sID_opt = input("Press the respective key to navigate:")
+                        if not checkValidOptionNumb(sID_opt, 2):
+                            # if input not valid, reprint menu (continue goes to start of while loop)
+                            continue
 
-                    if sID_opt == "2":
-                        break
+                        if sID_opt == "2":
+                            break
 
-                    if sID_opt == "1":
-                        stud_to_rem = input("Enter ID of student to remove:")
-                        if checkStudentID(stud_to_rem) and (stud_to_rem in dictStudent):
-                            pass
-                            # remove student from semester.enrolledStudent
-                            # remove from dictStudent
-                
+                        if sID_opt == "1":
+                            stud_to_rem = input("Enter ID of student to remove:")
+                            if checkStudentID(stud_to_rem) and (stud_to_rem in dictStudent):
+                                pass
+                                # remove student from semester.enrolledStudent
+                                # remove from dictStudent
+                    
 
         if admin_opt == "2": 
             pass
