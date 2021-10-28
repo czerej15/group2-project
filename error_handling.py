@@ -30,12 +30,18 @@ def checkValidOptionNumb(option, max):
 
 def checkDOBValid(dob):
     """This functions returns true if dob is in this format: DD/MM/YYYY , e.g. 17/03/2012. . raise an error if appropiate with unique message """
-    try:
-         return True
-       
-    except:       
-        return False
+dob = input("Enter the date of birth : ")
+day,month,year = dob.split('/')
+ValidDate = True
+try :
+    dob.dob(int(year),int(month),int(day))
 
+except ValueError :
+    ValidDate = False
+if(ValidDate) :
+    print ("The date of birth is valid")
+else :
+    print ("The date of birth is not valid")
 def checkNameValid(name):
     """ return false is contains any non alphabet characters. raise an error if appropiate with unique message """
     try:
