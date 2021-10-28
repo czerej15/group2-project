@@ -234,7 +234,46 @@ def adminMenu():
                         input('Press enter to go back')
 
         if admin_opt == "6": 
-            pass
+            print("-----------------------------------------")
+            id = input("Enter student ID:")
+            if checkStudentID(id): # returns true if valid
+                if id not in dictStudent: # if student not returned
+                    print("Student not found.")
+                    continue
+            student = dictStudent[id]
+
+            if student.studyPlan == '':
+                print('Please generate a study plan first.')
+                program = dictPrograms[student.programCode]
+                toDo = []
+                doneSub = []
+
+                for item in program.core_courses:
+                    if item in student.academicHist or item in student.currentEnrol:
+                        doneSub.append(item)
+                    else:
+                        toDo.append(item)
+
+                for ToDoIndex in range(len(toDo)):
+                    subject = dictSubject[toDo[ToDoIndex]]
+                    for subjectPrereq in subject.prerequisites:
+                        if subjectPrereq in toDo:
+                            toDo.pop(ToDoIndex)
+                            toDo.insert(ToDoIndex+1, toDo[ToDoIndex])
+                    
+                student.studyPlan = toDo
+
+            print(f"Student Study Plan: {[it for it in student.studyPlan]}")
+
+            addrem_inputPlan = input('What class would you like to Add/Remove?: ')
+            if addrem_inputPlan not in student.studyPlan:
+                addrem_inputPlan2 = input('At what point would this be inserted: ')
+                student.studyPlan.insert(int(addrem_inputPlan2), addrem_inputPlan)
+            else:
+                student.studyPlan.remove(addrem_inputPlan)
+
+            print(f"Student Study Plan: {student.studyPlan}")
+
 
         if admin_opt == "7": 
             pass
@@ -247,10 +286,8 @@ def adminMenu():
                     print("Student not found.")
                     continue
                 
-                student = dictStudent[id]
-                program = dictPrograms[student.programCode]
-                
-
+            student = dictStudent[id]
+            program = dictPrograms[student.programCode]
             toDo = []
             doneSub = []
 
@@ -259,7 +296,6 @@ def adminMenu():
                     doneSub.append(item)
                 else:
                     toDo.append(item)
-            print(toDo)
 
             for ToDoIndex in range(len(toDo)):
                 subject = dictSubject[toDo[ToDoIndex]]
@@ -268,7 +304,9 @@ def adminMenu():
                         toDo.pop(ToDoIndex)
                         toDo.insert(ToDoIndex+1, toDo[ToDoIndex])
             
-            print(toDo)
+            student.studyPlan = toDo
+
+            print(f"Student Study Plan: {student.studyPlan}")
 
         if admin_opt == "9": 
             pass

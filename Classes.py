@@ -137,13 +137,14 @@ class Student: # Keely
 	# - If a student failed a course, the status of the study plan should indicate that it needs to be adjusted to reflect the updated plan on remaining studies.
 	# - Similarly,if a student enrol in or unenroll from a course offering, this status should also be updated to reflect adjustment is needed on the studyplan.
 	# - When a new study plan is generated, the status of the study plan should indicate that the study plan is up-to-date.
-	def __init__(self, name, studentID = '', dob = '', programCode = '', academicHist = [], currentEnrol = []):
+	def __init__(self, name, studentID = '', dob = '', programCode = '', academicHist = [], currentEnrol = [], studyPlan= []):
 		self.name = name
 		self.studentID = studentID
 		self.dob = dob
 		self.programCode = programCode  # had to temporarly comment this out for testing - james  #keely changed it for inputing data
 		self.academicHist = academicHist #list [courseCode, mark, grade]
 		self.currentEnrol = currentEnrol #list of lists of class codes [course code, semester, year] in [subject1, subject2, subject3, subject4]
+		self.studyPlan = studyPlan
 
 	def __str__(self): 
 		print(f"Name: {self.name}")
