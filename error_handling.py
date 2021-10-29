@@ -34,7 +34,7 @@ dob = input("Student date of birth : ")
 day,month,year = dob.split('/')
 ValidDate = True
 try :
-    dob.dob(int(year),int(month),int(day))
+    dob.dob(int(day),int(month),int(year))
 
 except ValueError :
     ValidDate = False
@@ -42,11 +42,16 @@ if(ValidDate) :
     print ("The date of birth is valid")
 else :
     print ("The date of birth is not valid")
+    
+    
 def checkNameValid(name):
     """ return false is contains any non alphabet characters. raise an error if appropiate with unique message """
+
     try:
+        if not name.isalpha():
+            raise NameError("Invalid Name ")
          # use .isalpha()
-         return True
+        return True
        
     except:       
         return False
