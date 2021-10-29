@@ -30,18 +30,15 @@ def checkValidOptionNumb(option, max):
 
 def checkDOBValid(dob):
     """This functions returns true if dob is in this format: DD/MM/YYYY , e.g. 17/03/2012. . raise an error if appropiate with unique message """
-dob = input("Student date of birth : ")
-day,month,year = dob.split('/')
-ValidDate = True
-try :
-    dob.dob(int(day),int(month),int(year))
+    try :
+        dob.dob(int(day),int(month),int(year))
 
-except ValueError :
-    ValidDate = False
-if(ValidDate) :
-    print ("The date of birth is valid")
-else :
-    print ("The date of birth is not valid")
+    except ValueError :
+        ValidDate = False
+    if(ValidDate) :
+        print ("The date of birth is valid")
+    else :
+        print ("The date of birth is not valid")
     
     
 def checkNameValid(name):

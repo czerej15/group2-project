@@ -13,15 +13,14 @@ def adminMenu():
         print("4 - Add/Remove a semester")
         print("5 - Query student information")
         print("6 - Allow manual amendment of the study plan for a student")
-        print("7 - Validating a student’s study plan")
-        print("8 - Generate a study plan for a student")
-        print("9 - Display list of student achievements for course")
-        print("10 - Exit")
+        print("7 - Generate a study plan for a student")
+        print("8 - Display list of student achievements for course")
+        print("9 - Exit")
         admin_opt = input("Press the respective key to navigate:")
         if not checkValidOptionNumb(admin_opt, 10):
             continue
 
-        if admin_opt == '10': #exit
+        if admin_opt == '9': #exit
             break
 
         if admin_opt == "1":  # remove/add student
@@ -278,12 +277,9 @@ def adminMenu():
             print(f"Student Study Plan: {student.studyPlan}")
 
             print()
-            input('Press enter to go back')
+            input('Press enter to go back ')
 
         if admin_opt == "7": 
-            pass
-
-        if admin_opt == "8": 
             print("-----------------------------------------")
             id = input("Enter student ID:")
             if checkStudentID(id): # returns true if valid
@@ -316,8 +312,14 @@ def adminMenu():
             print()
             input('Press enter to go back')
 
-        if admin_opt == "9": 
-            pass
+        if admin_opt == "8": 
+            print("-----------------------------------------")
+            id = input("Enter student ID:")
+            if checkStudentID(id): # returns true if valid
+                if id not in dictStudent: # if student not returned
+                    print("Student not found.")
+                    continue
+            student = dictStudent[id]
 
 if __name__ == "__main__": # for testing
     adminMenu()
