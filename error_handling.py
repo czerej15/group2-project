@@ -1,9 +1,9 @@
 def checkStudentID(id):
     """Return True if valid ID, else return False. prints related error messages"""
     try:
-        # also check if length of id is correct (needs to be 8 characters exactly, including s) 
-        # print unique message if not as well
-        # like what u did with: raise ValueError("Id doesn't start with 's'")   
+        if len(id) != 8:
+            print("Needs to be excatly 8 characters long, including \'s\'")
+            return False
         if id[0] != "s":
             raise ValueError("Id doesn't start with 's'")   
         for i in range(1, len(id)):

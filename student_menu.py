@@ -44,7 +44,7 @@ def studentMenu():
                     print("6 - Exit")
                     stud_opt = input("Press the respective key to navigate:")
                     
-                    if not checkValidOptionNumb(stud_opt, 5):
+                    if not checkValidOptionNumb(stud_opt, 6):
                         # if input not valid, reprint menu (continue goes to start of while loop)
                         continue
 
@@ -128,20 +128,33 @@ def studentMenu():
                                 # go through course offerings in the current semester, sorting semesters 
                                 # into avaliable or unavaliable 
                                 for offering in dictSemester['S22021'].course_offerings:
-                                    # if course was attempted (in acedmic history)
-                                    if (offering.id in student.academicHist):
-                                        # if attempted course resulted in failure, can do again
-                                        index =  student.academicHist.index(offering.id)
-                                        if int(student.academicHist[index+1]) > 59:
+                                    # check student meets preerquisies
+                                    flag = True
+                                    for preq in dictSubject[offering.id].prerequisites:
+                                        if preq == "None":
+                                            continue
+                                        if preq in student.academicHist:
+                                            continue
+                                        else:
+                                            flag = False
+                                            unav_courses.append(offering.id)
+                                            break
+                                    if flag == True:
+                                        # if course was attempted (in acedmic history)
+                                        if (offering.id in student.academicHist):
+                                            # if attempted course resulted in failure, can do again
+                                            index =  student.academicHist.index(offering.id)
+                                            if int(student.academicHist[index+1]) > 59:
+                                                unav_courses.append(offering.id)
+                                            else:
+                                                avail_courses.append(offering.id)
+                                        elif (offering.id in student.currentEnrol):
+                                            # if student currently doing course 
                                             unav_courses.append(offering.id)
                                         else:
                                             avail_courses.append(offering.id)
-                                    elif (offering.id in student.currentEnrol):
-                                        # if student currently doing course 
-                                        unav_courses.append(offering.id)
-                                    else:
-                                        avail_courses.append(offering.id)
                                 print("-----------------------------------------")
+                                print("Please note, you can only enroll in courses for this current semester (S2, 2021)")
                                 print("Available Courses:")
                                 for avai in avail_courses:
                                    print(avai)
@@ -151,18 +164,11 @@ def studentMenu():
                                 for unav in unav_courses:
                                    print(unav)
 
+                                
                                 enrol_cour = input("Enter course code you wish to enrol in:")
                                 # check student has completed prerequistes for course wanting to enrol in
                                 if enrol_cour in avail_courses:
-                                    flag = True
-                                    for preq in dictSubject[enrol_cour].prerequisites:
-                                        if preq in student.academicHist:
-                                            continue
-                                        else:
-                                            flag = False
-                                    if flag == True:
-                                        # if preequistes satisfied, enrol
-                                     
+                    
                                         dictSemester["S22021"].add_student(enrol_cour, student.studentID)
                                         student.currentEnrol.append(enrol_cour)
                                         student.currentEnrol.append('S22021')

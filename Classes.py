@@ -28,9 +28,9 @@ class Course:
 		return_string = ''
 		return_string += 'Code: ' + self.code + "\n"
 		return_string += 'Title: ' + self.title + "\n"
-		return_string += 'Credit: ' + self.credit + "\n"
-		return_string += 'Prerequistes: ' + self.prerequisites + "\n"
-		return_string += 'Avaliable Semesters:: ' + self.semesters
+		return_string += 'Credit: ' + str(self.credit) + "\n"
+		return_string += 'Prerequistes: ' + str(self.prerequisites) + "\n"
+		return_string += 'Avaliable Semesters:: ' + str(self.semesters)
 		return return_string
 
 class Program: 
@@ -62,8 +62,8 @@ class Program:
 		return_string = ''
 		return_string += "Code: " + self.code + "\n"
 		return_string += 'Credit Points: ' + self.points + "\n"
-		return_string += 'Core Course: ' + self.core_courses + "\n"
-		return_string += 'Electives: ' + self.electives + "\n"
+		return_string += 'Core Course: ' + str(self.core_courses) + "\n"
+		return_string += 'Electives: ' + str(self.electives) + "\n"
 		return return_string
 
 class CourseOffering():

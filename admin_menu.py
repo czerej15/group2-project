@@ -17,7 +17,7 @@ def adminMenu():
         print("8 - Display list of student achievements for course")
         print("9 - Exit")
         admin_opt = input("Press the respective key to navigate:")
-        if not checkValidOptionNumb(admin_opt, 10):
+        if not checkValidOptionNumb(admin_opt, 9):
             continue
 
         if admin_opt == '9': #exit
@@ -45,15 +45,26 @@ def adminMenu():
                         
                         while True:
                             new_id = input('Enter a student ID:')
-                            if checkStudentID(new_id) and not (new_id in dictStudent): # if valid id, break while loop and continue
+                            if (new_id in dictStudent):
+                                print("There is already a student with that ID")
+                                continue
+                            if checkStudentID(new_id): # if valid id, break while loop and continue
                                 break
 
                         while True:
-                            new_dob = input('Enter a date of birth:') # when i run the admin menu this line runs first, i an not even asked to select anything at all?? I can't figure it out, is it the indents? - keely 
+                            new_dob = input('Enter a date of birth:')
                             if checkDOBValid(new_dob): # if valid dob, break while loop and continue
                                 break
-                      
-                        dictStudent[new_id] = Student(name = new_name, studentID = new_id, dob = new_dob) # create new instance of student and add to  
+
+                        while True:
+                            new_program = input('Enter a program code:')  
+                            if new_program in dictPrograms: # if valid dob, break while loop and continue
+                                break   
+                            else:
+                                print("Program not found")
+
+                        dictStudent[new_id] = Student(name = new_name, studentID = new_id, dob = new_dob, programCode = new_program) # create new instance of student and add to  
+                        print()
                         print("Successfully added", new_id)
                         input("Press enter to return")  
                             
@@ -81,9 +92,10 @@ def adminMenu():
                                         if stud_to_rem in offering.enrolled_students:
                                             # only attempts to remove if in list, else an error is generated
                                             offering.enrolled_students.remove(stud_to_rem)
-                            print("Successfully removed", stud_to_rem)
-                            input("Press enter to return")
-                    
+                                print()
+                                print("Successfully removed", stud_to_rem)
+                                input("Press enter to return")
+                        
 
         if admin_opt == "2": # add/remove course
             while True:
@@ -135,6 +147,7 @@ def adminMenu():
                         dictSemester[semester].add_course_offering(new_code, new_cap)
                       
                     dictSubject[new_code] = Course(title = new_title, code = new_code, credit = new_credit, prereques = preq_list, sems = semstr_list) # create new instance of student and add to  
+                    print()
                     print("Successfully added", new_code)
                     input("Press enter to return")  
                             
@@ -172,14 +185,14 @@ def adminMenu():
                                         del student.currentEnrol[index]
                                         del student.currentEnrol[index]
                                         del student.currentEnrol[index]
-                                
+                                print()
                                 print("Successfully removed", cou_to_rem)
                                 input("Press enter to return")
                     
                             else:
+                                print()
                                 print('This course could not be found')
-                                    
-                               
+                                                               
 
         if admin_opt == "3": 
             while True:
@@ -226,6 +239,7 @@ def adminMenu():
                         new_elective = input("Enter an elective, or enter 'e' to stop:")                    
                    
                     dictPrograms[new_code] = Program(new_code, new_points, core = core_list, electives = elective_list)
+                    print()
                     print("Successfully added", new_code)
                     input("Press enter to return")
                     
@@ -241,6 +255,7 @@ def adminMenu():
                     for student in dictStudent.values():
                         if student.programCode == code:
                             student.programCode = '' # set students program to nothing
+                    print()
                     print("Successfully removed", code)
                     input("Press enter to return")
 
