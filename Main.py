@@ -27,7 +27,6 @@ if __name__ == "__main__":
 				print('Goodbye.')
 				break 
 
-	
 		if main_opt == '1': # student menu
 			studentMenu()
 

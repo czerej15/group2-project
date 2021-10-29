@@ -96,7 +96,6 @@ def adminMenu():
                                 print("Successfully removed", stud_to_rem)
                                 input("Press enter to return")
                         
-
         if admin_opt == "2": # add/remove course
             while True:
                 print("----------------------------------------")
@@ -126,7 +125,7 @@ def adminMenu():
                         preq_list.append(new_preq)
                         new_preq = input("Enter a prequisite, or enter 'e' to stop:")
 
-                    new_semstr = input("Enter a semester, or enter 'e' to stop:")
+                    new_semstr = input("Enter a semester (e.g. S12021), or enter 'e' to stop:")
                     semstr_list = []
 
                     while new_semstr != 'e':
@@ -193,8 +192,7 @@ def adminMenu():
                                 print()
                                 print('This course could not be found')
                                                                
-
-        if admin_opt == "3": 
+        if admin_opt == "3": # add/remove program
             while True:
                 print("----------------------------------------")
                 print("1 - Add Program")
@@ -259,10 +257,74 @@ def adminMenu():
                     print("Successfully removed", code)
                     input("Press enter to return")
 
-        if admin_opt == "4": 
-            pass
+        if admin_opt == "4": # add/remove semester
+            while True:
+                print("----------------------------------------")
+                print("1 - Add semester")
+                print("2 - Remove semester")
+                print("3 - Exit")
+                sem_add_rem = input("Press the respective key to navigate:")
 
-        if admin_opt == "5": 
+                if not checkValidOptionNumb(sem_add_rem, 3):
+                    continue
+
+                if sem_add_rem == "3": # exit
+                    break
+                
+                if sem_add_rem == "1": # add semester
+                    while True:
+                        new_identity = input("Enter a semester identity (e.g., S22021):") 
+                        if not (new_identity in dictSemester): # if semester doesn't already exist
+                            break # progress
+                        print("Semester already exists")
+
+                    semester_obj = Semester(new_identity)
+                    # ask course id
+                    print()
+                    new_course = input("Enter a course ID, or enter 'e' to stop:") 
+                    while new_course != 'e':
+                        # ask student cap
+                        while True:
+                            new_cap = input("Enter a student cap:")
+                            if new_cap.isdigit():
+                                break
+                            print("Student cap must be an integer")
+                        
+                        semester_obj.add_course_offering(id = new_course, cap = new_cap)
+
+                        new_stud = input("Enter a student ID, or enter 'e' to stop:") 
+                        while new_stud != 'e':
+                            if checkStudentID(new_stud):
+                                semester_obj.add_student(new_course, new_stud)
+                            new_stud = input("Enter a student ID, or enter 'e' to stop:") 
+                                   
+                        # repeat process, asking for another course
+                        print()
+                        new_course = input("Enter a course ID, or enter 'e' to stop:")
+                    
+                    # add to semester dictionary
+                    dictSemester[new_identity] = semester_obj
+                    print(dictSemester[new_identity].course_offerings)
+                    print(new_identity)
+                    print()
+                    print("Successfully added", new_identity)
+                    input("Press enter to return") 
+                    print(dictSemester['S12022'])
+
+                    # until stop for every course offering:
+                        # ask course id
+                        # ask student cap
+                        #until stop:
+                            # add student
+          
+                if sem_add_rem == "2": # remove semester
+                    # remove from dictSemester
+                    # for every course offering in semester to remove
+                        # look at enrolled student list
+                            # for the student, uneneroll in that 
+                    pass
+                     
+        if admin_opt == "5": # query student
             while True:
                 print("-----------------------------------------")
                 print("1 - Enter student ID")

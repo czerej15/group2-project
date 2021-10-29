@@ -107,10 +107,8 @@ class Semester: # James
 		course.enrolled_students.remove(student)
 
 	def __str__(self):
-		print(self.identity)
-		for course in self.course_offerings:
-			print(course.name)
-
+		return str(self.identity) + str(self.course_offerings)
+		
 	def getCourseOfferingObj(self, name):
 		for course in self.course_offerings:
 			if course.id == name:
