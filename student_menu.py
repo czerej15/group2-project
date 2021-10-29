@@ -1,6 +1,7 @@
 from Classes import Course, Program, Semester, Student
 from error_handling import *
 from Inputing_Data import dictStudent, dictCourseOff, dictSubject, dictPrograms, dictSemester
+import matplotlib.pyplot as plt
 
 def studentMenu():
     while True:
@@ -39,17 +40,18 @@ def studentMenu():
                     print("2 - Querying course or program information")
                     print("3 - Enrol/UnEnrol in a current offering")
                     print("4 - View current GPA") # in progress for extra functionalities
-                    print("5 - Exit")
+                    print("5 - View graph of acedimic results")
+                    print("6 - Exit")
                     stud_opt = input("Press the respective key to navigate:")
                     
                     if not checkValidOptionNumb(stud_opt, 5):
                         # if input not valid, reprint menu (continue goes to start of while loop)
                         continue
 
-                    if stud_opt == "5": #exit
+                    if stud_opt == "6": #exit
                         break
 
-                    if stud_opt == "1":                         
+                    if stud_opt == "1":  # Display academic history and current enrolment                       
                         print("------------Current Enrolment------------")
                         # loop through currentEnrol list, printing its contents
                         c = 0
@@ -69,10 +71,9 @@ def studentMenu():
                             print("Grade:", student.academicHist[c+2]) 
                             c += 3
                         print()
-                        input('Press enter to go back')
+                        input('Press enter to go back')                       
                         
-                        
-                    if stud_opt == "2":        
+                    if stud_opt == "2":  # Querying course or program information 
                         while True:
                             print("-----------------------------------------")
                             print("1 - Query Course")
@@ -106,7 +107,7 @@ def studentMenu():
                                 print(dictPrograms[program])
                                 input("Press enter to go back")                
 
-                    if stud_opt == "3": 
+                    if stud_opt == "3": # Enrol/UnEnrol in a current offering
                         while True:
                             print("-----------------------------------------")
                             print("1 - Enrol")
@@ -198,7 +199,7 @@ def studentMenu():
                                 else:
                                     print("Not a valid course to unenroll from")
 
-                    if stud_opt == "4": 
+                    if stud_opt == "4": # View current GPA
                         print("------------Student GPA------------")
                         gradePoints = 0
                         creditPoints = 0
@@ -222,3 +223,20 @@ def studentMenu():
 
                         print()
                         input('Press enter to go back')
+                    
+                    if stud_opt == "5": # Graph results
+                        history = student.academicHist
+                        #print(history)
+                        x = []
+                        y = []
+                        count = 0
+                        for i in range(len(history)//3):
+                            x.append(history[count])
+                            y.append(int(history[count+1]))
+                            count += 3
+                        plt.scatter(x,y)
+                        plt.title("Results for " + str(student.studentID))
+                        plt.xlabel("Course")
+                        plt.ylabel("Mark")
+                        plt.ylim([0, 100])
+                        plt.show()
