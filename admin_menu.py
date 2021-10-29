@@ -50,7 +50,7 @@ def adminMenu():
                                 break
 
                         while True:
-                            new_dob = input('Enter a date of birth:')
+                            new_dob = input('Enter a date of birth:') # when i run the admin menu this line runs first, i an not even asked to select anything at all?? I can't figure it out, is it the indents? - keely 
                             if checkDOBValid(new_dob): # if valid dob, break while loop and continue
                                 break
                       
