@@ -53,7 +53,8 @@ def checkNameValid(name):
          # use .isalpha()
         return True
        
-    except:       
+    except Exception as e: 
+        print(e)      
         return False
 
     
