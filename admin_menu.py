@@ -243,7 +243,7 @@ def adminMenu():
             student = dictStudent[id]
 
             if student.studyPlan == '':
-                print('Please generate a study plan first.')
+                print("------------Study Plan------------")
                 program = dictPrograms[student.programCode]
                 toDo = []
                 doneSub = []
@@ -264,6 +264,9 @@ def adminMenu():
                 student.studyPlan = toDo
 
             print(f"Student Study Plan: {[it for it in student.studyPlan]}")
+            print()
+
+            print("------------Amend Study Plan------------")
 
             addrem_inputPlan = input('What class would you like to Add/Remove?: ')
             if addrem_inputPlan not in student.studyPlan:
@@ -274,6 +277,8 @@ def adminMenu():
 
             print(f"Student Study Plan: {student.studyPlan}")
 
+            print()
+            input('Press enter to go back')
 
         if admin_opt == "7": 
             pass
@@ -307,6 +312,9 @@ def adminMenu():
             student.studyPlan = toDo
 
             print(f"Student Study Plan: {student.studyPlan}")
+
+            print()
+            input('Press enter to go back')
 
         if admin_opt == "9": 
             pass
