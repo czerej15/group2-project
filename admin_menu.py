@@ -182,7 +182,67 @@ def adminMenu():
                                
 
         if admin_opt == "3": 
-            pass
+            while True:
+                print("----------------------------------------")
+                print("1 - Add Program")
+                print("2 - Remove Program")
+                print("3 - Exit")
+                prog_add_rem = input("Press the respective key to navigate:")
+
+                if not checkValidOptionNumb(prog_add_rem, 3):
+                    continue
+
+                if prog_add_rem == "3": # exit
+                    break
+                
+                if prog_add_rem == "1": # add program
+                    
+                    new_code = input("Enter the program's code:")
+                    
+                    # check points is an integer
+                    while True:
+                        new_points = input("Enter the program's points (e.g. 288):")
+                        if new_points.isdigit():
+                            break
+                        print("Points must be an integer")
+                        
+                    
+                    new_core = input("Enter a core course, or enter 'e' to stop:")
+                    core_list = []
+                    while new_core != 'e':
+                        if new_core in dictSubject:
+                            core_list.append(new_core)
+                        else:
+                            print("Course not found")
+                        new_core = input("Enter a core course, or enter 'e' to stop:")
+                        
+                    new_elective = input("Enter an elective, or enter 'e' to stop:")
+                    elective_list = []
+                    while new_elective != 'e':
+                        if new_elective in dictSubject:
+                            elective_list.append(new_elective)
+                        else:
+                            print("Course not found")
+                        new_elective = input("Enter an elective, or enter 'e' to stop:")                    
+                   
+                    dictPrograms[new_code] = Program(new_code, new_points, core = core_list, electives = elective_list)
+                    print("Successfully added", new_code)
+                    input("Press enter to return")
+                    
+
+                if prog_add_rem == "2": # remove program
+                    code = input("Enter code of program to remove:")
+                    if not (code in dictPrograms):
+                        print("Program not found")
+                        continue
+                    else:
+                        del dictPrograms[code]
+                    # remove program from students
+                    for student in dictStudent.values():
+                        if student.programCode == code:
+                            student.programCode = '' # set students program to nothing
+                    print("Successfully removed", code)
+                    input("Press enter to return")
 
         if admin_opt == "4": 
             pass
