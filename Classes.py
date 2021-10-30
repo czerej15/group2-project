@@ -30,7 +30,7 @@ class Course:
 		return_string += 'Title: ' + self.title + "\n"
 		return_string += 'Credit: ' + str(self.credit) + "\n"
 		return_string += 'Prerequistes: ' + str(self.prerequisites) + "\n"
-		return_string += 'Avaliable Semesters:: ' + str(self.semesters)
+		return_string += 'Avaliable Semesters: ' + str(self.semesters)
 		return return_string
 
 class Program: 

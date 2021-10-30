@@ -20,16 +20,16 @@ for i in range(len(contents)): # for each student
 ###################################################################
 # Course Offerings
 # open and read data from file
-#f = open('Course_Offerings.csv')
-#contents = f.read().split('\n') # split each course offering up
-#f.close()
+f = open('Course_Offerings.csv')
+contents = f.read().split('\n') # split each course offering up
+f.close()
 
 dictCourseOff = {}
 
-#for i in range(len(contents)): # for each course offering
-#	l = contents[i].split(';') # split the data in a course offering record into the seperate features
-#	ID = CourseOffering(l[0], l[1], l[2]) # create course offering instance
-#	dictCourseOff[l[0]] = ID # assign the instance to a dictionary key. Access it by calling dictStudent['COSC2800'].enrolled_students ect 
+for i in range(len(contents)): # for each course offering
+	l = contents[i].split(';') # split the data in a course offering record into the seperate features
+	ID = CourseOffering(l[0], l[1], l[2]) # create course offering instance
+	dictCourseOff[l[0]] = ID # assign the instance to a dictionary key. Access it by calling dictStudent['COSC2800'].enrolled_students ect 
 ###################################################################
 
 ###################################################################
