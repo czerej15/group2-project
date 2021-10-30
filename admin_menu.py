@@ -318,11 +318,17 @@ def adminMenu():
                             # add student
           
                 if sem_add_rem == "2": # remove semester
-                    # remove from dictSemester
-                    # for every course offering in semester to remove
-                        # look at enrolled student list
-                            # for the student, uneneroll in that 
-                    pass
+                    sem_to_remove = input("Enter a semester to remove")
+                    if sem_to_remove in dictSemester:
+                        del dictSemester[sem_to_remove]
+                        # remove from dictSemester
+                        # for every course offering in semester to remove
+                            # look at enrolled student list
+                                # for the student, uneneroll in that 
+                    else:
+                        print("Semester not found")
+                        input("Press enter to return")
+
                      
         if admin_opt == "5": # query student
             while True:
@@ -417,7 +423,7 @@ def adminMenu():
             input('Press enter to go back ')
 
         if admin_opt == "7": 
-            print("------------Generate Study Plan------------")
+            print("-----------------------------------------")
             id = input("Enter student ID:")
             if checkStudentID(id): # returns true if valid
                 if id not in dictStudent: # if student not returned
@@ -450,23 +456,13 @@ def adminMenu():
             input('Press enter to go back')
 
         if admin_opt == "8": 
-            print("------------Student Achievements------------")
+            print("-----------------------------------------")
             id = input("Enter student ID:")
             if checkStudentID(id): # returns true if valid
                 if id not in dictStudent: # if student not returned
                     print("Student not found.")
                     continue
             student = dictStudent[id]
-
-            count = 2
-            print(f"{student.name} has achieved above 90% (A+) in the following classes: ")
-            for grade in range(len(student.academicHist)):
-                if count % 3 == 0 and int(student.academicHist[grade]) >= 90:
-                    print(f"    {student.academicHist[grade - 1]} with a score of {student.academicHist[grade]}")
-                count += 1
-
-            print()
-            input('Press enter to go back')
 
 if __name__ == "__main__": # for testing
     adminMenu()
