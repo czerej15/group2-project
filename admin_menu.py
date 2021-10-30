@@ -141,7 +141,7 @@ def adminMenu():
                             break
                         print("Cap must be a number")
 
-                    #for every applicale semester, add to course offerings list
+                    #for every chosen semester, add to course offerings list
                     for semester in semstr_list:
                         dictSemester[semester].add_course_offering(new_code, new_cap)
                       
@@ -304,21 +304,13 @@ def adminMenu():
                     
                     # add to semester dictionary
                     dictSemester[new_identity] = semester_obj
-                    print(dictSemester[new_identity].course_offerings)
-                    print(new_identity)
                     print()
                     print("Successfully added", new_identity)
                     input("Press enter to return") 
-                    print(dictSemester['S12022'])
-
-                    # until stop for every course offering:
-                        # ask course id
-                        # ask student cap
-                        #until stop:
-                            # add student
+                   
           
                 if sem_add_rem == "2": # remove semester
-                    sem_to_remove = input("Enter a semester to remove")
+                    sem_to_remove = input("Enter a semester to remove:")
                     if sem_to_remove in dictSemester:
                         del dictSemester[sem_to_remove]
                         if sem_to_remove == "S22021": # if chosen semester to remove is the current one, unerol students with courses
@@ -326,6 +318,8 @@ def adminMenu():
                             for student in dictSemester:
                                 # clear students enrolled courses
                                 student.currentEnrol = []
+                        print("Successfully removed semester", sem_to_remove)
+                        input("Press enter to return")
                       
                     else:
                         print("Semester not found")

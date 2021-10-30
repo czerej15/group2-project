@@ -1,6 +1,6 @@
 from Classes import Course, Program, Semester, Student
 from error_handling import *
-from Inputing_Data import dictStudent, dictCourseOff, dictSubject, dictPrograms, dictSemester
+from Inputing_Data import dictStudent, dictSubject, dictPrograms, dictSemester
 import matplotlib.pyplot as plt
 
 def studentMenu():
@@ -92,6 +92,7 @@ def studentMenu():
                                 course = input("Enter course code:")
                                 if not (course in dictSubject):
                                     print('Course not found')
+                                    input("Press enter to go back")
                                     continue
                                 print("-----------------------------------------")
                                 print(dictSubject[course])
@@ -123,11 +124,20 @@ def studentMenu():
                                 break
                             
                             if enroll_inpt == '1': # enrol
+                                if 'S12022' not in dictSemester:
+                                    print("Create a S12022 first")
+                                    input("Press enter to return")
+                                    continue
                                 unav_courses = []
                                 avail_courses = []
                                 # go through course offerings in the current semester, putting courses into avaliable or unavaliable 
-                            
-                                for offering in dictSemester['S22021'].course_offerings:
+
+                                for offering in dictSemester['S12022'].course_offerings:
+                                    # check not currently enrolled
+                                    if offering.id in student.currentEnrol:
+                                        unav_courses.append(offering.id)
+                                        continue
+                                        
                                     # check student meets preerquisies
                                     flag = True
                                     for preq in dictSubject[offering.id].prerequisites:
@@ -139,7 +149,7 @@ def studentMenu():
                                             flag = False
                                             unav_courses.append(offering.id)
                                             break
-                                    if flag == True: # if prerequistes meet
+                                    if flag == True: # if prerequistes met
                                         # if course was attempted (in acedmic history)
                                         if (offering.id in student.academicHist):
                                             # if attempted course resulted in failure, can do again
@@ -155,7 +165,7 @@ def studentMenu():
                                         else:
                                             avail_courses.append(offering.id)
                                 print("-----------------------------------------")
-                                print("Please note, you can only enroll in courses for this current semester (S2, 2021)")
+                                print("Please note, you can only enroll in courses for next semester (S1, 2022)")
                                 print("Available Courses:")
                                 for avai in avail_courses:
                                    print(avai)
@@ -169,12 +179,13 @@ def studentMenu():
                                 enrol_cour = input("Enter course code you wish to enrol in:")
                                 
                                 if enrol_cour in avail_courses: # if avaliable course
-                    
-                                        checkInCap = dictSemester["S22021"].add_student(enrol_cour, student.studentID)
+                                        # check the cap limit has not been exceeded
+                                        # checkInCap returns false if cap exceeded, else returns true and also adds student to course offering
+                                        checkInCap = dictSemester["S12022"].add_student(enrol_cour, student.studentID)
                                         if checkInCap:
                                             student.currentEnrol.append(enrol_cour)
-                                            student.currentEnrol.append('S22021')
-                                            student.currentEnrol.append('2021')
+                                            student.currentEnrol.append('S12022')
+                                            student.currentEnrol.append('2022')
                                             print("Successfully enrolled in ", enrol_cour)
                                             input('Press enter to go back')
                                         else:
