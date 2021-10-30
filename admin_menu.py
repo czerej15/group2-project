@@ -321,10 +321,12 @@ def adminMenu():
                     sem_to_remove = input("Enter a semester to remove")
                     if sem_to_remove in dictSemester:
                         del dictSemester[sem_to_remove]
-                        # remove from dictSemester
-                        # for every course offering in semester to remove
-                            # look at enrolled student list
-                                # for the student, uneneroll in that 
+                        if sem_to_remove == "S22021": # if chosen semester to remove is the current one, unerol students with courses
+                            # for every student
+                            for student in dictSemester:
+                                # clear students enrolled courses
+                                student.currentEnrol = []
+                      
                     else:
                         print("Semester not found")
                         input("Press enter to return")

@@ -6,3 +6,11 @@ Meeting Notes
     - decided to create a class instance every time a row was read
     - access the instance via a dictionary
     - the student input is complete so all the otehrs are based off it
+
+
+Assumptions we made:
+- students' currently enrolled courses are for the current semester (S2 2021)
+- students can only enrol in next semester (S1 2022)
+- students can only enrol & uneroll in current semester (S2 2021)
+
+
