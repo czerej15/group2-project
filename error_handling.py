@@ -23,6 +23,7 @@ def checkValidOptionNumb(option, max):
         option = int(option)
         if 1 <= option <= max:
             return True
+        print("Not a valid option")
         raise ValueError
     except Exception as e:       
         print(e)
@@ -51,9 +52,10 @@ def checkNameValid(name):
     """ return false is contains any non alphabet characters. raise an error if appropiate with unique message """
 
     try:
+        name = name.replace(' ','') # disregard spaces
         if not name.isalpha():
             raise NameError("Invalid Name ")
-         # use .isalpha()
+        
         return True
        
     except Exception as e: 

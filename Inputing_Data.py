@@ -78,11 +78,13 @@ for line in contents:
 	# line example
 	# ['S12021', 'COSC2801,5,s3900781,s3900123,s3900321', 'IBY2041,3,s3900111,s3900222,s3900555']
 	new_semester = Semester(line[0])
-	for course in line[1:]:
+	for course in line[1:]: # ignore semester identiy
 		course = course.split(',')
+		#print(course)
 		new_semester.add_course_offering(course[0], course[1])
-		for student in course[2:]:
-			new_semester.add_student(course[0], student)
+		if len(course) > 2: # if there are students entered in csv for course e.g. s3900781,s3900123,s3900321
+			for student in course[2:]:
+				new_semester.add_student(course[0], student)
 	dictSemester[new_semester.identity] = new_semester
 
 
