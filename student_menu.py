@@ -125,8 +125,8 @@ def studentMenu():
                             if enroll_inpt == '1': # enrol
                                 unav_courses = []
                                 avail_courses = []
-                                # go through course offerings in the current semester, sorting semesters 
-                                # into avaliable or unavaliable 
+                                # go through course offerings in the current semester, putting courses into avaliable or unavaliable 
+                            
                                 for offering in dictSemester['S22021'].course_offerings:
                                     # check student meets preerquisies
                                     flag = True
@@ -139,7 +139,7 @@ def studentMenu():
                                             flag = False
                                             unav_courses.append(offering.id)
                                             break
-                                    if flag == True:
+                                    if flag == True: # if prerequistes meet
                                         # if course was attempted (in acedmic history)
                                         if (offering.id in student.academicHist):
                                             # if attempted course resulted in failure, can do again
@@ -147,6 +147,7 @@ def studentMenu():
                                             if int(student.academicHist[index+1]) > 59:
                                                 unav_courses.append(offering.id)
                                             else:
+                                                # passed course, cant do it again
                                                 avail_courses.append(offering.id)
                                         elif (offering.id in student.currentEnrol):
                                             # if student currently doing course 
@@ -166,18 +167,24 @@ def studentMenu():
 
                                 
                                 enrol_cour = input("Enter course code you wish to enrol in:")
-                                # check student has completed prerequistes for course wanting to enrol in
-                                if enrol_cour in avail_courses:
+                                
+                                if enrol_cour in avail_courses: # if avaliable course
                     
-                                        dictSemester["S22021"].add_student(enrol_cour, student.studentID)
-                                        student.currentEnrol.append(enrol_cour)
-                                        student.currentEnrol.append('S22021')
-                                        student.currentEnrol.append('2021')
-                                        print("Successfully enrolled in ", enrol_cour)
-                                        input('Press enter to go back')
-                                    
+                                        checkInCap = dictSemester["S22021"].add_student(enrol_cour, student.studentID)
+                                        if checkInCap:
+                                            student.currentEnrol.append(enrol_cour)
+                                            student.currentEnrol.append('S22021')
+                                            student.currentEnrol.append('2021')
+                                            print("Successfully enrolled in ", enrol_cour)
+                                            input('Press enter to go back')
+                                        else:
+                                            print("Student cap for that course in that semester has been exceeded")
+                                            print("Could not enrol")
+                                            input('Press enter to go back')
+
                                 else:
                                     print('Not available course')
+                                    input('Press enter to go back')
                                 
                                 
 
