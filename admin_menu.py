@@ -417,7 +417,7 @@ def adminMenu():
             input('Press enter to go back ')
 
         if admin_opt == "7": 
-            print("-----------------------------------------")
+            print("------------Generate Study Plan------------")
             id = input("Enter student ID:")
             if checkStudentID(id): # returns true if valid
                 if id not in dictStudent: # if student not returned
@@ -450,13 +450,23 @@ def adminMenu():
             input('Press enter to go back')
 
         if admin_opt == "8": 
-            print("-----------------------------------------")
+            print("------------Student Achievements------------")
             id = input("Enter student ID:")
             if checkStudentID(id): # returns true if valid
                 if id not in dictStudent: # if student not returned
                     print("Student not found.")
                     continue
             student = dictStudent[id]
+
+            count = 2
+            print(f"{student.name} has achieved above 90% (A+) in the following classes: ")
+            for grade in range(len(student.academicHist)):
+                if count % 3 == 0 and student.academicHist[grade] >= 90:
+                    print(f"    {student.academicHist[grade - 1]} with a score of {student.academicHist[grade]}")
+                count += 1
+
+            print()
+            input('Press enter to go back')
 
 if __name__ == "__main__": # for testing
     adminMenu()

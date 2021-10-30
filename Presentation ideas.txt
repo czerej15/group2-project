@@ -1,5 +1,5 @@
-Presentation ideas
-- inputting data
+Meeting Notes
+--- 
     - the data was originally too complicated and too much
     - decided to just do two rows of each to simplify things, other rows could be added later
     - then it was imputing the data so that the data was in the correct format
