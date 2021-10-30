@@ -99,8 +99,10 @@ class Semester: # James
 		course = self.getCourseOfferingObj(course_name)
 		if len(course.enrolled_students) <= course.cap:
 			course.enrolled_students.append(student)
+			return True
 		else:
 			print("Can't add, cap reached.")
+			return False
 
 	def remove_student(self, course_name, student):
 		course = self.getCourseOfferingObj(course_name)
