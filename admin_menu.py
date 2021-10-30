@@ -1,6 +1,6 @@
 from Classes import Course, Program, Semester, Student
 from error_handling import *
-from Inputing_Data import dictStudent, dictCourseOff, dictSubject, dictPrograms, dictSemester
+from Inputing_Data import dictStudent, dictSubject, dictPrograms, dictSemester
 
 def adminMenu():
     while True:
@@ -384,6 +384,7 @@ def adminMenu():
                     continue
             student = dictStudent[id]
 
+            # if there is no study plan in place already generate one
             if student.studyPlan == '':
                 print("------------Study Plan------------")
                 program = dictPrograms[student.programCode]
@@ -405,19 +406,20 @@ def adminMenu():
                     
                 student.studyPlan = toDo
 
+            # print study plan
             print(f"Student Study Plan: {[it for it in student.studyPlan]}")
             print()
 
             print("------------Amend Study Plan------------")
-
+            
             addrem_inputPlan = input('What class would you like to Add/Remove?: ')
-            if addrem_inputPlan not in student.studyPlan:
-                addrem_inputPlan2 = input('At what point would this be inserted: ')
+            if addrem_inputPlan not in student.studyPlan: # if class not in study plan then it should be inserted
+                addrem_inputPlan2 = input(f'At what point would this be inserted, please type an index from 0 to {len(student.studyPlan)}: ')
                 student.studyPlan.insert(int(addrem_inputPlan2), addrem_inputPlan)
             else:
-                student.studyPlan.remove(addrem_inputPlan)
+                student.studyPlan.remove(addrem_inputPlan) #if the subject is in study plan, remove it
 
-            print(f"Student Study Plan: {student.studyPlan}")
+            print(f"Student Study Plan: {student.studyPlan}") # print new study plan
 
             print()
             input('Press enter to go back ')
@@ -431,17 +433,17 @@ def adminMenu():
                     continue
                 
             student = dictStudent[id]
-            program = dictPrograms[student.programCode]
+            program = dictPrograms[student.programCode] #assign class instances
             toDo = []
-            doneSub = []
+            doneSub = [] #defin lists
 
             for item in program.core_courses:
                 if item in student.academicHist or item in student.currentEnrol:
-                    doneSub.append(item)
+                    doneSub.append(item) #for every item in the program's core courses, if it has been completed is or is being completed, add it to doneSub
                 else:
-                    toDo.append(item)
+                    toDo.append(item) #otherwise it has not been completed and should be added to toDo
 
-            for ToDoIndex in range(len(toDo)):
+            for ToDoIndex in range(len(toDo)): #this sorts the uncompleted core subjects in relation to if they involve a prerequisite in the study plan and therefore must be completed at a later date
                 subject = dictSubject[toDo[ToDoIndex]]
                 for subjectPrereq in subject.prerequisites:
                     if subjectPrereq in toDo:
@@ -450,7 +452,7 @@ def adminMenu():
             
             student.studyPlan = toDo
 
-            print(f"Student Study Plan: {student.studyPlan}")
+            print(f"Student Study Plan: {student.studyPlan}") #prints study plan
 
             print()
             input('Press enter to go back')
@@ -464,5 +466,13 @@ def adminMenu():
                     continue
             student = dictStudent[id]
 
-if __name__ == "__main__": # for testing
-    adminMenu()
+            count = 2
+            print(f"{student.name} has achieved above 90% (A+) in the following classes: ") # prints the 
+            for grade in range(len(student.academicHist)):
+                if count % 3 == 0 and int(student.academicHist[grade]) >= 90:
+                    subject = dictSubject[student.academicHist[grade - 1]]
+                    print(f"    {subject.name} with a score of {student.academicHist[grade]}")
+                count += 1
+
+            print()
+            input('Press enter to go back')

@@ -215,12 +215,12 @@ def studentMenu():
                     if stud_opt == "4": # View current GPA
                         print("------------Student GPA------------")
                         gradePoints = 0
-                        creditPoints = 0
+                        creditPoints = 0 #initialise grade and credit points
                         for acaRecord in student.academicHist:
-                            if acaRecord in dictSubject:
+                            if acaRecord in dictSubject: #for every class in a student's academic history, add up the number of credit points
                                 creditPoints += int(dictSubject[acaRecord].credit)
                                 tempCredit = int(dictSubject[acaRecord].credit)
-                            if acaRecord == 'HD':
+                            if acaRecord == 'HD': # calculate gpa
                                 gradePoints += 4 * tempCredit
                             elif acaRecord == 'DI': 
                                 gradePoints += 3 * tempCredit
@@ -232,7 +232,7 @@ def studentMenu():
                                 gradePoints += 0
                             
                             GPA = gradePoints/creditPoints
-                            print(f"{student.name}'s GPA is {GPA:.2f}")
+                            print(f"{student.name}'s GPA is {GPA:.2f}") #print gpa
 
                         print()
                         input('Press enter to go back')
