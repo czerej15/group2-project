@@ -461,7 +461,7 @@ def adminMenu():
             count = 2
             print(f"{student.name} has achieved above 90% (A+) in the following classes: ")
             for grade in range(len(student.academicHist)):
-                if count % 3 == 0 and student.academicHist[grade] >= 90:
+                if count % 3 == 0 and int(student.academicHist[grade]) >= 90:
                     print(f"    {student.academicHist[grade - 1]} with a score of {student.academicHist[grade]}")
                 count += 1
 
