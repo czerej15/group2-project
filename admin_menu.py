@@ -18,8 +18,8 @@ def adminMenu():
         print("9 - Exit")
         admin_opt = input("Press the respective key to navigate:")
         if not checkValidOptionNumb(admin_opt, 9):
-            continue
-
+            continue # reprints menu
+        
         if admin_opt == '9': #exit
             break
 
@@ -32,10 +32,10 @@ def adminMenu():
                 add_or_rem_inpt = input("Press the respective key to navigate:")
 
                 if not checkValidOptionNumb(admin_opt, 3):
-                    continue
+                    continue # reprint menu
 
                 if add_or_rem_inpt == "3":
-                    break
+                    break # exit
 
                 if add_or_rem_inpt == "1": # add student option
                         while True:
@@ -62,8 +62,8 @@ def adminMenu():
                                 break   
                             else:
                                 print("Program not found")
-
-                        dictStudent[new_id] = Student(name = new_name, studentID = new_id, dob = new_dob, programCode = new_program) # create new instance of student and add to  
+                        # create new instance of student and add to dictionary of student objects
+                        dictStudent[new_id] = Student(name = new_name, studentID = new_id, dob = new_dob, programCode = new_program) 
                         print()
                         print("Successfully added", new_id)
                         input("Press enter to return")  
@@ -84,7 +84,7 @@ def adminMenu():
 
                         if sID_opt == "1":
                             stud_to_rem = input("Enter ID of student to remove:")
-                            if checkStudentID(stud_to_rem) and (stud_to_rem in dictStudent): # if valid id and is a student in the system
+                            if checkStudentID(stud_to_rem) and (stud_to_rem in dictStudent): # if valid id and if a student in the system
                                 dictStudent.pop(stud_to_rem) # remove from dictStudent dictionary
                                 # for every semester, remove student from every course offering
                                 for semester in dictSemester.values():
@@ -121,14 +121,14 @@ def adminMenu():
                     
                     new_preq = input("Enter a prequisite, or enter 'e' to stop:")
                     preq_list = []
-                    while new_preq != 'e':
+                    while new_preq != 'e': # continuely add prequisites until told to stop
                         preq_list.append(new_preq)
                         new_preq = input("Enter a prequisite, or enter 'e' to stop:")
 
                     new_semstr = input("Enter a semester (e.g. S12021), or enter 'e' to stop:")
                     semstr_list = []
 
-                    while new_semstr != 'e':
+                    while new_semstr != 'e': # continuely add semester until told to stop
                         if new_semstr in dictSemester:
                             semstr_list.append(new_semstr)
                         else:
@@ -141,7 +141,7 @@ def adminMenu():
                             break
                         print("Cap must be a number")
 
-                    #for every chosen semester, add to course offerings list
+                    #for every chosen semester, add course to course offerings list
                     for semester in semstr_list:
                         dictSemester[semester].add_course_offering(new_code, new_cap)
                       
@@ -169,7 +169,7 @@ def adminMenu():
                             if cou_to_rem in dictSubject:
                                 # remove course from semester instances
                                 for semester in dictSubject[cou_to_rem].semesters: 
-                                    cour_obj = dictSemester[semester].getCourseOfferingObj(cou_to_rem)
+                                    cour_obj = dictSemester[semester].getCourseOfferingObj(cou_to_rem) # returns false or true as well
                                     if not (cour_obj == False):
                                         dictSemester[semester].course_offerings.remove(cour_obj)
                                 
@@ -180,7 +180,7 @@ def adminMenu():
                                     if cou_to_rem in student.currentEnrol:
                                        
                                         index = student.currentEnrol.index(cou_to_rem)
-                                        
+                                        # all index shifted by 1 after deleting, so thats why index is the same but deletes 3 different thing
                                         del student.currentEnrol[index]
                                         del student.currentEnrol[index]
                                         del student.currentEnrol[index]
@@ -220,8 +220,8 @@ def adminMenu():
                     
                     new_core = input("Enter a core course, or enter 'e' to stop:")
                     core_list = []
-                    while new_core != 'e':
-                        if new_core in dictSubject:
+                    while new_core != 'e': # add course until told to stop
+                        if new_core in dictSubject: 
                             core_list.append(new_core)
                         else:
                             print("Course not found")
@@ -229,13 +229,13 @@ def adminMenu():
                         
                     new_elective = input("Enter an elective, or enter 'e' to stop:")
                     elective_list = []
-                    while new_elective != 'e':
+                    while new_elective != 'e': # add elective until told to stop
                         if new_elective in dictSubject:
                             elective_list.append(new_elective)
                         else:
                             print("Course not found")
                         new_elective = input("Enter an elective, or enter 'e' to stop:")                    
-                   
+                    # create new program instance and add to program dict
                     dictPrograms[new_code] = Program(new_code, new_points, core = core_list, electives = elective_list)
                     print()
                     print("Successfully added", new_code)
@@ -246,6 +246,7 @@ def adminMenu():
                     code = input("Enter code of program to remove:")
                     if not (code in dictPrograms):
                         print("Program not found")
+                        input("Press enter to return")
                         continue
                     else:
                         del dictPrograms[code]
@@ -279,7 +280,7 @@ def adminMenu():
                         print("Semester already exists")
 
                     semester_obj = Semester(new_identity)
-                    # ask course id
+                    
                     print()
                     new_course = input("Enter a course ID, or enter 'e' to stop:") 
                     while new_course != 'e':
@@ -291,7 +292,7 @@ def adminMenu():
                             print("Student cap must be an integer")
                         
                         semester_obj.add_course_offering(id = new_course, cap = new_cap)
-
+                        # add students until told to stop
                         new_stud = input("Enter a student ID, or enter 'e' to stop:") 
                         while new_stud != 'e':
                             if checkStudentID(new_stud):
@@ -311,7 +312,7 @@ def adminMenu():
           
                 if sem_add_rem == "2": # remove semester
                     sem_to_remove = input("Enter a semester to remove:")
-                    if sem_to_remove in dictSemester:
+                    if sem_to_remove in dictSemester: # check actual semester
                         del dictSemester[sem_to_remove]
                         if sem_to_remove == "S22021": # if chosen semester to remove is the current one, unerol students with courses
                             # for every student
@@ -336,13 +337,13 @@ def adminMenu():
                     # if input not valid, reprint menu (continue goes to start of while loop)
                     continue
 
-                if sID_opt == '2':
+                if sID_opt == '2': #exit
                     break
 
                 if sID_opt == '1':
                     print("-----------------------------------------")
                     student_id = input('Enter ID of student to query:')
-                    if checkStudentID(student_id) and (student_id in dictStudent):
+                    if checkStudentID(student_id) and (student_id in dictStudent): # if valid id and student in system
                         student = dictStudent[student_id]
                         print("-----------------------------------------")
                         print("Name:", student.name)
@@ -371,13 +372,14 @@ def adminMenu():
                         print()
                         input('Press enter to go back')
 
-        if admin_opt == "6": 
+        if admin_opt == "6":  # manual amendment of the study plan
             print("-----------------------------------------")
             id = input("Enter student ID:")
             if checkStudentID(id): # returns true if valid
                 if id not in dictStudent: # if student not returned
                     print("Student not found.")
-                    continue
+                    input("Press enter to return")
+                    continue # go back to admin menu
             student = dictStudent[id]
 
             # if there is no study plan in place already generate one
@@ -420,12 +422,13 @@ def adminMenu():
             print()
             input('Press enter to go back ')
 
-        if admin_opt == "7": 
+        if admin_opt == "7": # Generate a study plan for a student
             print("-----------------------------------------")
             id = input("Enter student ID:")
             if checkStudentID(id): # returns true if valid
                 if id not in dictStudent: # if student not returned
                     print("Student not found.")
+                    input("Press enter to return")
                     continue
                 
             student = dictStudent[id]
@@ -453,12 +456,13 @@ def adminMenu():
             print()
             input('Press enter to go back')
 
-        if admin_opt == "8": 
+        if admin_opt == "8": #Display list of student achievements for course
             print("-----------------------------------------")
             id = input("Enter student ID:")
             if checkStudentID(id): # returns true if valid
                 if id not in dictStudent: # if student not returned
                     print("Student not found.")
+                    input("Press enter to return")
                     continue
             student = dictStudent[id]
 

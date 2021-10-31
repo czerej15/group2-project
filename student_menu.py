@@ -124,14 +124,14 @@ def studentMenu():
                                 break
                             
                             if enroll_inpt == '1': # enrol
-                                if 'S12022' not in dictSemester:
+                                if 'S12022' not in dictSemester: # can only enroll in current semester. current semester should therefore exist
                                     print("Create a S12022 first")
                                     input("Press enter to return")
                                     continue
+
                                 unav_courses = []
                                 avail_courses = []
                                 # go through course offerings in the current semester, putting courses into avaliable or unavaliable 
-
                                 for offering in dictSemester['S12022'].course_offerings:
                                     # check not currently enrolled
                                     if offering.id in student.currentEnrol:
@@ -142,9 +142,9 @@ def studentMenu():
                                     flag = True
                                     for preq in dictSubject[offering.id].prerequisites:
                                         if preq == "None":
-                                            continue
+                                            continue # if preq == None, it means has no prerequisites
                                         if preq in student.academicHist:
-                                            continue
+                                            continue # this preq is fine, check next preq
                                         else:
                                             flag = False
                                             unav_courses.append(offering.id)
@@ -160,29 +160,31 @@ def studentMenu():
                                                 # passed course, cant do it again
                                                 avail_courses.append(offering.id)
                                         elif (offering.id in student.currentEnrol):
-                                            # if student currently doing course 
+                                            # if student currently doing course, cant enrol in it
                                             unav_courses.append(offering.id)
                                         else:
                                             avail_courses.append(offering.id)
                                 print("-----------------------------------------")
                                 print("Please note, you can only enroll in courses for next semester (S1, 2022)")
+                                # print all Available Courses
                                 print("Available Courses:")
                                 for avai in avail_courses:
                                    print(avai)
 
+                                # print all Unavailable Courses
                                 print()
                                 print("Unavailable Course:")
                                 for unav in unav_courses:
                                    print(unav)
 
-                                
                                 enrol_cour = input("Enter course code you wish to enrol in:")
                                 
                                 if enrol_cour in avail_courses: # if avaliable course
                                         # check the cap limit has not been exceeded
                                         # checkInCap returns false if cap exceeded, else returns true and also adds student to course offering
                                         checkInCap = dictSemester["S12022"].add_student(enrol_cour, student.studentID)
-                                        if checkInCap:
+                                        if checkInCap: # if doesnt exceed cap
+                                            # add to students current enrolement
                                             student.currentEnrol.append(enrol_cour)
                                             student.currentEnrol.append('S12022')
                                             student.currentEnrol.append('2022')
@@ -209,9 +211,10 @@ def studentMenu():
 
                                 unenrol_cour = input("Enter course code you wish to unenroll from:")
                                 if unenrol_cour in student.currentEnrol:
+                                    # removes current semester i.e S22021
                                     dictSemester["S22021"].remove_student(unenrol_cour, student.studentID)
+                                    # remove unerolled course from student's current enrollment
                                     index =  student.currentEnrol.index(unenrol_cour)
-                                    
                                     del student.currentEnrol[index]
                                     del student.currentEnrol[index]
                                     del student.currentEnrol[index]
@@ -247,20 +250,21 @@ def studentMenu():
                         input('Press enter to go back')
                     
                     if stud_opt == "5": # Graph results
-                        history = student.academicHist
-                        #print(history)
+                        history = student.academicHist # just so dont have to type student.academicHist everytime
+
                         x = []
                         y = []
                         count = 0
                         for i in range(len(history)//3):
-                            x.append(history[count])
-                            y.append(int(history[count+1]))
+                            x.append(history[count]) # add course names to x
+                            y.append(int(history[count+1])) # add course mark to y
                             count += 3
+                        # using matplotlib to create a scatter plot
                         plt.scatter(x,y)
                         plt.title("Results for " + str(student.studentID))
                         plt.xlabel("Course")
                         plt.ylabel("Mark")
-                        plt.ylim([0, 100])
+                        plt.ylim([0, 100]) # so y axis is alwayd 0 to 100, not min to max e.g. 45 to 87
                         plt.show()
                     
                     if stud_opt == "6": # print acedimic history sorted
@@ -268,18 +272,18 @@ def studentMenu():
                         c=0 # count variable
                         hist = student.academicHist.copy() # copy of student.academicHist 
                         for i in range(len(hist)//3):
-                            # find highest in current list
+                            # find highest for each iteration 
                             c2 = 0
                             max = -1
                             for i in range(len(hist)//3):
                                 if int(hist[c2+1]) > max:
-                                    max = int(hist[c2+1])
+                                    max = int(hist[c2+1]) # e.g. max = 82
                                 c2+=3
-                            sorted_hist.append(hist[hist.index(str(max))-1])
-                            sorted_hist.append(hist[hist.index(str(max))])
-                            sorted_hist.append(hist[hist.index(str(max))+1])
-                            hist[hist.index(str(max))] = 0
-                                                   
+                            sorted_hist.append(hist[hist.index(str(max))-1]) # the course code of max
+                            sorted_hist.append(hist[hist.index(str(max))]) # the mark of max
+                            sorted_hist.append(hist[hist.index(str(max))+1]) # the grade of max
+                            hist[hist.index(str(max))] = 0 # set max to 0 so when checking again it doesnt notice it
+                        # print out sorted acedmic history                     
                         c3=0 # another counter
                         for i in range(len(sorted_hist)//3):
                             print(f"{i+1}) {sorted_hist[c3]} {sorted_hist[c3+1]} {sorted_hist[c3+2]}")
