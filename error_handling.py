@@ -50,18 +50,13 @@ def checkDOBValid(dob):
     
 def checkNameValid(name):
     """ return false is contains any non alphabet characters. raise an error if appropiate with unique message """
-
     try:
         name = name.replace(' ','') # disregard spaces
         if not name.isalpha():
             raise NameError("Invalid Name ")
-        
         return True
        
     except Exception as e: 
         print(e)      
         return False
 
-if __name__ == "__main__":
-    print(checkDOBValid('00/00/2002'))
-    #print('0343'.isdigit())
