@@ -1,4 +1,3 @@
-from Classes import Course, Program, Semester, Student
 from error_handling import *
 from Inputing_Data import dictStudent, dictSubject, dictPrograms, dictSemester
 import matplotlib.pyplot as plt
