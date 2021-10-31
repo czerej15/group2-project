@@ -40,14 +40,15 @@ def studentMenu():
                     print("3 - Enrol/UnEnrol in a current offering")
                     print("4 - View current GPA") # in progress for extra functionalities
                     print("5 - View graph of acedimic results")
-                    print("6 - Exit")
+                    print("6 - View acedimic results sorted")
+                    print("7 - Exit")
                     stud_opt = input("Press the respective key to navigate:")
                     
-                    if not checkValidOptionNumb(stud_opt, 6):
+                    if not checkValidOptionNumb(stud_opt, 7):
                         # if input not valid, reprint menu (continue goes to start of while loop)
                         continue
 
-                    if stud_opt == "6": #exit
+                    if stud_opt == "7": #exit
                         break
 
                     if stud_opt == "1":  # Display academic history and current enrolment                       
@@ -196,9 +197,7 @@ def studentMenu():
                                     print('Not available course')
                                     input('Press enter to go back')
                                 
-                                
-
-                        
+                         
                             if enroll_inpt == '2': # unenroll
                                 print("-----------------------------------------")
                                 print("Currently Enrolled Courses:")
@@ -263,3 +262,26 @@ def studentMenu():
                         plt.ylabel("Mark")
                         plt.ylim([0, 100])
                         plt.show()
+                    
+                    if stud_opt == "6": # print acedimic history sorted
+                        sorted_hist = [] 
+                        c=0 # count variable
+                        hist = student.academicHist.copy() # copy of student.academicHist 
+                        for i in range(len(hist)//3):
+                            # find highest in current list
+                            c2 = 0
+                            max = -1
+                            for i in range(len(hist)//3):
+                                if int(hist[c2+1]) > max:
+                                    max = int(hist[c2+1])
+                                c2+=3
+                            sorted_hist.append(hist[hist.index(str(max))-1])
+                            sorted_hist.append(hist[hist.index(str(max))])
+                            sorted_hist.append(hist[hist.index(str(max))+1])
+                            hist[hist.index(str(max))] = 0
+                                                   
+                        c3=0 # another counter
+                        for i in range(len(sorted_hist)//3):
+                            print(f"{i+1}) {sorted_hist[c3]} {sorted_hist[c3+1]} {sorted_hist[c3+2]}")
+                            c3+=3
+                        input("Press enter to return")
