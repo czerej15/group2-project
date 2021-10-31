@@ -467,7 +467,7 @@ def adminMenu():
             for grade in range(len(student.academicHist)):
                 if count % 3 == 0 and int(student.academicHist[grade]) >= 90:
                     subject = dictSubject[student.academicHist[grade - 1]]
-                    print(f"    {subject.name} with a score of {student.academicHist[grade]}")
+                    print(f"    {subject.title} with a score of {student.academicHist[grade]}")
                 count += 1
 
             print()
