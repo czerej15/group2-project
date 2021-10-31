@@ -243,7 +243,7 @@ def studentMenu():
                                 gradePoints += 0
                             
                             GPA = gradePoints/creditPoints
-                            print(f"{student.name}'s GPA is {GPA:.2f}") #print gpa
+                        print(f"{student.name}'s GPA is {GPA:.2f}") #print gpa
 
                         print()
                         input('Press enter to go back')
