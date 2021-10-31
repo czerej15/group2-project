@@ -1,5 +1,16 @@
 Meeting Notes
---- 
+--- 4/11 ---
+    [] Create github repository -James
+    [] 
+
+--- 11/10 ---
+    - 
+--- 18/10 ---
+    -
+--- 25/10 ---
+    -
+
+
     - the data was originally too complicated and too much
     - decided to just do two rows of each to simplify things, other rows could be added later
     - then it was imputing the data so that the data was in the correct format
