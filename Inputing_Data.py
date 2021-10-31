@@ -17,14 +17,6 @@ for i in range(len(contents)): # for each student
 	dictStudent[l[1]] = ID # assign the instance to a dictionary key. Access it by calling dictStudent['s3898340'].name ect 
 ###################################################################
 
-###################################################################
-# Course Offerings
-# open and read data from file
-f = open('Course_Offerings.csv')
-contents = f.read().split('\n') # split each course offering up
-f.close()
-
-###################################################################
 # Program
 # open and read data from file
 f = open('programs.csv')
@@ -81,16 +73,3 @@ for line in contents:
 	dictSemester[new_semester.identity] = new_semester
 
 
-if __name__ == "__main__": # for testing
-
-	#print(dictSemester["S22021"].identity)
-	#for course in dictSemester["S22021"].course_offerings:
-	#	print(course)
-	#	print()
-	#print(dictSubject)
-	#print(dictSubject["ISYS1118"].prerequisites[0])
-	print(dictSubject)
-	for ting in dictSubject:
-		print(dictSubject[ting].prerequisites)
-	
-	#print(dictSubject["COSC2804"].prerequisites[0])
